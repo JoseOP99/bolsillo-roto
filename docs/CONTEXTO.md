@@ -23,6 +23,8 @@ API JWT usa el token del usuario, por lo que las políticas RLS siguen aplicánd
 
 ## Sesiones
 
+Roles de aplicación: `SUPERADMIN_EMAIL` (solo servidor) identifica el correo confirmado que puede consultar el directorio administrativo. Los demás usuarios son normales; ninguna API Key habilita administración. El rol no amplía el acceso RLS a finanzas ajenas. Configuración inicial solicitada: superadmin jockrlos210@gmail.com, usuario normal padilla99j@gmail.com. Ambos deben registrarse y confirmar su correo; no se crearon contraseñas ni usuarios automáticamente. Endpoints `/api/v1/me` y `/api/v1/admin/users`; guía de despliegue: DESPLIEGUE.md.
+
 El cliente persiste y refresca sesión con Supabase. No se promete permanencia absoluta: expiraciones de configuración, cambios de contraseña, revocaciones, eliminación de almacenamiento y seguridad del proveedor pueden cerrar la sesión. Véase [Supabase sessions](https://supabase.com/docs/guides/auth/sessions).
 
 La tabla de dispositivos identifica el `session_id` del JWT ya verificado. RLS de tablas financieras comprueba que no esté revocado. Revocar aplica a la app y a sus políticas de datos; no elimina necesariamente la sesión interna de `auth.sessions` ni invalida instantáneamente un JWT para otros servicios de Supabase. No se usa Storage en esta versión.

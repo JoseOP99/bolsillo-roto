@@ -19,3 +19,7 @@ Fecha: 29 de octubre de 2026. Se usó la base única `kgergeimnxcyptffvmnp`; no 
 No se probó el flujo autenticado completo con cuentas de usuario reales ni el aislamiento funcional con dos usuarios porque no se crearon usuarios/datos de prueba en la base real. No se probó una llamada externa con API Key: falta la credencial privada de servidor. El cron y Telegram necesitan configuración; no se enviaron notificaciones externas. Instalación PWA en dispositivos físicos, email, push, audio y widgets nativos no se verificaron. El adaptador Telegram solo registra mensajes de texto: no envía respuestas al chat.
 
 Estas limitaciones están reflejadas en README y PRD; no deben presentarse como integraciones activas.
+
+## Ajuste de roles y despliegue
+
+Compilación correcta con 16 rutas, typecheck correcto y 8 pruebas aprobadas. Las tres nuevas pruebas de roles cubren correo confirmado/configurado, configuración ausente y escalación mediante metadatos. Se consultó Auth: ninguno de los dos correos solicitados existía. No se crearon usuarios, contraseñas ni un despliegue. SUPERADMIN_EMAIL se configura únicamente en servidor. La guía DESPLIEGUE.md detalla variables, URLs, SMTP y validación de ambas cuentas.

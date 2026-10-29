@@ -67,6 +67,7 @@ Las pruebas cubren tasas, conservación de capital, fechas de fin de mes y anál
 ## Documentación
 
 - [Contexto y arquitectura](docs/CONTEXTO.md)
+- [Despliegue en Vercel, URLs y roles](docs/DESPLIEGUE.md)
 - [Diseño](docs/DISENO.md)
 - [API e integración AppSheet](docs/API.md)
 - [Widgets y PWA](docs/WIDGETS.md)

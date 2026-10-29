@@ -75,3 +75,7 @@ Valida primero con un registro autorizado. Un fallo 503 en la ruta de integraci�
 `POST /api/telegram` valida `X-Telegram-Bot-Api-Secret-Token` y el chat configurado, interpreta `Gasté 20k en comida` y llama a la API con idempotencia por update ID. Es un adaptador personal de un chat/usuario por despliegue; el modelo multiusuario necesita una vinculación de chats por usuario antes de ampliarlo. No acepta audio aún. Registra el webhook usando Bot API y el mismo `secret_token`; no pongas secretos en la URL de tu aplicación.
 
 `GET /api/cron/alerts` solo acepta `Authorization: Bearer CRON_SECRET`. Vercel llama una vez al día a las 13:00 UTC (08:00 de Bogotá). Genera notificaciones internas, sin enviar email ni push. La entrega externa y la suscripción a webhooks salientes quedan pendientes.
+
+## Roles y administración
+
+GET /api/v1/me devuelve identidad y rol calculado en servidor. GET /api/v1/admin/users?page=1 lista hasta 50 usuarios. Ambos exigen JWT; el directorio exige además correo confirmado coincidente con SUPERADMIN_EMAIL. El usuario normal recibe 403 y una API Key no da acceso. No se exponen movimientos financieros de otros usuarios.

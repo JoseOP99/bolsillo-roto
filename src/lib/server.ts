@@ -110,7 +110,7 @@ export async function identity(request: Request, sessionOnly = false) {
     );
     if (e) throw new ApiError(503, "No se pudo registrar el dispositivo.");
   }
-  return { db, userId: user.id, apiKey: false, sessionId: sid };
+  return { db, userId: user.id, apiKey: false, sessionId: sid, user };
 }
 export function json(value: unknown, status = 200) {
   return Response.json(value, {

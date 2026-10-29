@@ -31,6 +31,7 @@ import { amortize, money, monthlyRate } from "@/lib/finance";
 import { supabase as liveSupabase } from "@/lib/supabase";
 import Loans from "./loans";
 import Projection from "./projection";
+import AdminUsers from "./admin-users";
 import { transactionSchema, type TransactionInput } from "@/lib/schemas";
 type Account = {
   id: string;
@@ -173,6 +174,7 @@ function Line({ coral = false }: { coral?: boolean }) {
 export default function Dashboard({ demo = false }: { demo?: boolean }) {
   const supabase = demo ? null : liveSupabase;
   const pendingSave = useRef<{ body: string; key: string } | null>(null);
+  const [role, setRole] = useState<"user" | "superadmin">("user");
   const [alerts, setAlerts] = useState<
     { id: string; message: string; due_date: string }[]
   >([]);
@@ -236,6 +238,10 @@ export default function Dashboard({ demo = false }: { demo?: boolean }) {
           return;
         }
         if (deviceResponse.ok) setSessions((await deviceResponse.json()).data);
+        const me = await fetch("/api/v1/me", {
+          headers: { Authorization: `Bearer ${session.access_token}` },
+        });
+        setRole(me.ok ? (await me.json()).data.role : "user");
       }
       const allTransactions = async () => {
         const data: Tx[] = [];
@@ -261,6 +267,7 @@ export default function Dashboard({ demo = false }: { demo?: boolean }) {
         setTxs(t.data || []);
       }
     } else {
+      setRole("user");
       setAccounts([]);
       setTxs([]);
     }
@@ -540,6 +547,15 @@ export default function Dashboard({ demo = false }: { demo?: boolean }) {
               {l}
             </button>
           ))}
+          {role === "superadmin" && (
+            <button
+              className={page === "Administración" ? "active" : ""}
+              onClick={() => go("Administración")}
+            >
+              <KeyRound size={19} />
+              Administración
+            </button>
+          )}
         </div>
         <label className="search">
           <Search size={16} />
@@ -1092,6 +1108,7 @@ export default function Dashboard({ demo = false }: { demo?: boolean }) {
           {page === "Préstamos" && (
             <Loans db={supabase} userId={user?.id} notify={notify} />
           )}
+          {page === "Administración" && role === "superadmin" && <AdminUsers />}
           {page === "Proyección" && (
             <Projection
               db={supabase}
@@ -1516,10 +1533,19 @@ export default function Dashboard({ demo = false }: { demo?: boolean }) {
                   ) === "signup"
                     ? "signUp"
                     : "signInWithPassword";
-                const { error } = await supabase!.auth[method]({
+                const credentials = {
                   email: String(fd.get("email")),
                   password: String(fd.get("password")),
-                });
+                };
+                const { error } =
+                  method === "signUp"
+                    ? await supabase!.auth.signUp({
+                        ...credentials,
+                        options: {
+                          emailRedirectTo: window.location.origin + "/",
+                        },
+                      })
+                    : await supabase!.auth.signInWithPassword(credentials);
                 if (error) notify(error.message);
                 else {
                   notify(
