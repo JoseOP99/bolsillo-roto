@@ -1,0 +1,879 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="es"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0" name="viewport"/><meta content="web_dashboard" name="shell-type"/><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/><link href="https://fonts.googleapis.com" rel="preconnect"/><link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/><style>@layer base{html,body{margin:0;padding:0;}body{overscroll-behavior:none;}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}</style><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config={"darkMode":"class","theme":{"extend":{"colors":{"inverse-on-surface":"#2c303b","surface-dim":"#0f131d","on-secondary-container":"#ffcdc2","on-secondary-fixed":"#3d0600","on-secondary-fixed-variant":"#8c1800","secondary-fixed":"#ffdad3","background":"#0f131d","outline":"#849589","on-error":"#690005","on-error-container":"#ffdad6","on-tertiary-container":"#005a7b","error-container":"#93000a","surface-container-lowest":"#0a0e18","tertiary-fixed-dim":"#7bd0ff","surface-bright":"#353944","surface":"#0f131d","on-surface-variant":"#bacbbe","primary-fixed-dim":"#00e297","outline-variant":"#3b4a41","surface-variant":"#313540","on-tertiary-fixed-variant":"#004c69","on-primary":"#003822","tertiary-container":"#82d2ff","tertiary-fixed":"#c4e7ff","inverse-surface":"#dfe2f1","secondary-container":"#b72301","tertiary":"#c9e9ff","on-primary-fixed-variant":"#005234","on-primary-fixed":"#002112","on-surface":"#dfe2f1","primary-fixed":"#4dffb2","on-tertiary":"#00354a","secondary-fixed-dim":"#ffb4a4","surface-tint":"#00e297","primary":"#6dffba","on-secondary":"#630e00","surface-container-low":"#171b26","on-primary-container":"#00613e","on-tertiary-fixed":"#001e2c","surface-container-high":"#262a35","surface-container":"#1c1f2a","error":"#ffb4ab","secondary":"#ffb4a4","on-background":"#dfe2f1","inverse-primary":"#006c46","primary-container":"#00e599","surface-container-highest":"#313540"},"borderRadius":{"DEFAULT":"0.25rem","lg":"0.5rem","xl":"0.75rem","full":"9999px"},"spacing":{"space-2xs":"0.25rem","space-md":"1rem","space-xl":"2rem","space-lg":"1.5rem","space-2xl":"3rem","gutter":"1rem","gutter-tablet":"1.5rem","margin-tablet":"2rem","space-sm":"0.75rem","gutter-desktop":"2rem","margin-desktop":"3rem","margin":"1rem","space-xs":"0.5rem"},"fontFamily":{"label-lg":["Inter"],"display":["Plus Jakarta Sans"],"headline-lg":["Plus Jakarta Sans"],"display-mobile":["Plus Jakarta Sans"],"data-metric":["Inter"],"headline-sm":["Plus Jakarta Sans"],"label-md":["Inter"],"headline-lg-mobile":["Plus Jakarta Sans"],"body-sm":["Plus Jakarta Sans"],"label-sm":["Inter"],"body-md":["Plus Jakarta Sans"],"body-lg":["Plus Jakarta Sans"],"headline-md":["Plus Jakarta Sans"]},"fontSize":{"label-lg":["0.875rem",{"lineHeight":"1.25rem","letterSpacing":"0.01em","fontWeight":"600"}],"display":["3rem",{"lineHeight":"3.5rem","letterSpacing":"-0.03em","fontWeight":"800"}],"headline-lg":["2rem",{"lineHeight":"2.5rem","letterSpacing":"-0.02em","fontWeight":"700"}],"display-mobile":["2.25rem",{"lineHeight":"2.75rem","letterSpacing":"-0.025em","fontWeight":"800"}],"data-metric":["1.5rem",{"lineHeight":"1.75rem","letterSpacing":"-0.02em","fontWeight":"700"}],"headline-sm":["1.25rem",{"lineHeight":"1.75rem","letterSpacing":"-0.01em","fontWeight":"600"}],"label-md":["0.75rem",{"lineHeight":"1rem","letterSpacing":"0.02em","fontWeight":"500"}],"headline-lg-mobile":["1.75rem",{"lineHeight":"2.25rem","letterSpacing":"-0.02em","fontWeight":"700"}],"body-sm":["0.875rem",{"lineHeight":"1.25rem","fontWeight":"400"}],"label-sm":["0.6875rem",{"lineHeight":"0.875rem","letterSpacing":"0.04em","fontWeight":"600"}],"body-md":["1rem",{"lineHeight":"1.5rem","fontWeight":"400"}],"body-lg":["1.125rem",{"lineHeight":"1.75rem","fontWeight":"400"}],"headline-md":["1.5rem",{"lineHeight":"2rem","letterSpacing":"-0.015em","fontWeight":"600"}]}}}};</script></head><body class="bg-surface font-body-md text-body-md text-on-surface antialiased min-h-screen selection:bg-primary-container selection:text-on-primary-container"><header class="fixed top-0 w-full z-50 bg-surface/85 backdrop-blur-xl shadow-[0_1px_8px_rgba(0,0,0,0.25)]"><div class="h-16 w-full px-gutter-desktop flex items-center justify-between gap-space-lg"><div class="flex items-center gap-space-lg"><a class="flex items-center gap-space-sm group" data-path="dashboard" href="#"><img alt="Profile" class="w-8 h-8 rounded-full object-cover shadow-[0_0_12px_rgba(0,229,153,0.25)]" src="https://lh3.googleusercontent.com/aida/AEtjO1XoUe2BK0GeWt8wtiIpCjKbLagvTapI-QoO5bYVEv6oEzORshYAX6D7biQNAmA82FDf8i1IncDhRNezd3wPmqxf8gCA8gPR7qjFLvjapt06623Aem4oPG4U5NqpynBUAhzQQHeVFTVeYBnDmcJ4rgOGBR9QCnIFCbs_6hdCMjoSpzNhKeVA4oXknJYUgUaZx976kabhJ74pGuR1y3bHs1U1oryZaIvZmJf4vBtw-PI"/><div class="flex items-center gap-space-xs"><span class="font-headline-sm text-headline-sm tracking-tight text-on-surface">Bolsillo Roto</span><span class="font-label-sm text-label-sm px-space-xs py-space-2xs rounded-full bg-primary-container/20 text-primary border border-primary/30 tracking-wider uppercase font-bold">PRO</span></div></a><div class="h-5 w-px bg-outline-variant/40 hidden md:block"></div><nav class="hidden xl:flex items-center gap-space-xs p-space-2xs rounded-lg bg-surface-container-lowest/60" data-active-classes="bg-surface-container-high text-on-surface font-semibold"><a aria-current="page" class="px-space-sm py-space-xs rounded transition-colors bg-surface-container-high text-on-surface font-semibold" data-path="dashboard" href="#">Dashboard</a><a class="px-space-sm py-space-xs rounded font-label-md text-label-md text-on-surface-variant hover:text-on-surface hover:bg-surface-container transition-colors" data-path="motor-de-cuotas" href="#">Motor de Cuotas</a><a class="px-space-sm py-space-xs rounded font-label-md text-label-md text-on-surface-variant hover:text-on-surface hover:bg-surface-container transition-colors" data-path="integraciones-baas" href="#">Integraciones BaaS / API Keys</a><a class="px-space-sm py-space-xs rounded font-label-md text-label-md text-on-surface-variant hover:text-on-surface hover:bg-surface-container transition-colors" data-path="sesiones-dispositivos" href="#">Sesiones / Dispositivos</a></nav></div><div class="flex items-center gap-space-md"><div class="hidden sm:flex items-center gap-space-xs px-space-sm py-space-2xs rounded-full bg-surface-container-low border border-outline-variant/30 text-on-surface-variant font-label-sm text-label-sm"><span class="inline-block w-2 h-2 rounded-full bg-primary animate-pulse"></span><span class="text-primary font-semibold">Mainnet BaaS</span><span class="text-outline-variant">•</span><span>99.98% Latencia 18ms</span></div><div class="flex items-center gap-space-xs"><button class="p-space-xs rounded-lg text-on-surface-variant hover:text-on-surface hover:bg-surface-container transition-colors" type="button"><span class="material-symbols-outlined text-[20px]">terminal</span></button><button class="p-space-xs rounded-lg text-on-surface-variant hover:text-on-surface hover:bg-surface-container transition-colors" type="button"><span class="material-symbols-outlined text-[20px]">notifications</span></button><div class="h-5 w-px bg-outline-variant/30 mx-space-2xs"></div><div class="flex items-center gap-space-xs"><img alt="Profile" class="w-8 h-8 rounded-full object-cover ring-1 ring-primary/40" src="https://lh3.googleusercontent.com/aida/AEtjO1XoUe2BK0GeWt8wtiIpCjKbLagvTapI-QoO5bYVEv6oEzORshYAX6D7biQNAmA82FDf8i1IncDhRNezd3wPmqxf8gCA8gPR7qjFLvjapt06623Aem4oPG4U5NqpynBUAhzQQHeVFTVeYBnDmcJ4rgOGBR9QCnIFCbs_6hdCMjoSpzNhKeVA4oXknJYUgUaZx976kabhJ74pGuR1y3bHs1U1oryZaIvZmJf4vBtw-PI"/><div class="hidden lg:flex flex-col text-left"><span class="font-label-md text-label-md text-on-surface leading-tight">Fintech Ops</span><span class="font-label-sm text-label-sm text-on-surface-variant">prod-cluster-04</span></div></div></div></div></div></header><aside class="fixed left-0 top-0 h-full w-64 bg-surface-container-lowest/80 backdrop-blur-xl z-40 flex flex-col pt-16 pb-space-lg shadow-[1px_0_12px_rgba(0,0,0,0.3)]"><div class="px-space-lg py-space-md flex flex-col gap-space-2xs"><span class="font-label-sm text-label-sm text-outline uppercase tracking-wider font-semibold">BaaS Environment</span><div class="flex items-center justify-between p-space-xs rounded-lg bg-surface-container-low border border-outline-variant/40"><div class="flex items-center gap-space-xs"><span class="material-symbols-outlined text-primary text-[18px]">dns</span><span class="font-label-md text-label-md text-on-surface font-semibold">Production Node</span></div><span class="font-label-sm text-label-sm text-primary px-space-xs py-space-2xs rounded bg-primary/10">v2.4</span></div></div><div class="px-space-md py-space-xs"><span class="px-space-sm font-label-sm text-label-sm text-outline uppercase tracking-wider font-semibold">Plataforma</span></div><nav class="flex-1 px-space-md flex flex-col gap-space-2xs" data-active-classes="bg-primary-container text-on-primary-container font-semibold shadow-[0_0_12px_rgba(0,229,153,0.2)]"><a aria-current="page" class="flex items-center gap-space-sm px-space-md py-space-sm rounded-lg transition-colors bg-primary-container text-on-primary-container font-semibold shadow-[0_0_12px_rgba(0,229,153,0.2)]" data-path="dashboard" href="#"><span class="material-symbols-outlined text-[20px]">grid_view</span><span>Dashboard General</span></a><a class="flex items-center gap-space-sm px-space-md py-space-sm rounded-lg font-label-md text-label-md text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors" data-path="motor-de-cuotas" href="#"><span class="material-symbols-outlined text-[20px]">calculate</span><span>Motor de Cuotas</span></a><a class="flex items-center gap-space-sm px-space-md py-space-sm rounded-lg font-label-md text-label-md text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors" data-path="analitica-fugas" href="#"><span class="material-symbols-outlined text-[20px]">water_drop</span><span>Detección de Fugas</span></a><div class="my-space-xs px-space-sm"><span class="font-label-sm text-label-sm text-outline uppercase tracking-wider font-semibold">Infraestructura BaaS</span></div><a class="flex items-center gap-space-sm px-space-md py-space-sm rounded-lg font-label-md text-label-md text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors" data-path="integraciones-baas" href="#"><span class="material-symbols-outlined text-[20px]">key</span><span>API Keys &amp; Endpoints</span></a><a class="flex items-center gap-space-sm px-space-md py-space-sm rounded-lg font-label-md text-label-md text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors" data-path="webhooks-telemetria" href="#"><span class="material-symbols-outlined text-[20px]">webhook</span><span>Webhooks &amp; Logs</span></a><a class="flex items-center gap-space-sm px-space-md py-space-sm rounded-lg font-label-md text-label-md text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors" data-path="sesiones-dispositivos" href="#"><span class="material-symbols-outlined text-[20px]">devices</span><span>Sesiones &amp; Dispositivos</span></a></nav><div class="px-space-md pt-space-md"><div class="p-space-sm rounded-xl bg-surface-container-low border border-outline-variant/30 flex items-center justify-between"><div class="flex flex-col"><span class="font-label-sm text-label-sm text-outline">Cuota API Mes</span><span class="font-label-md text-label-md font-semibold text-on-surface">142.8k / 250k req</span></div><span class="material-symbols-outlined text-primary text-[20px]">bolt</span></div></div></aside><div class="pl-64"><main class="relative pt-16 w-full px-gutter-desktop bg-surface min-h-screen"><div class="flex flex-col w-full pb-space-2xl">
+<!-- Top Command & Status Ribbon -->
+<div class="flex flex-col lg:flex-row lg:items-center justify-between gap-space-md py-space-lg">
+<div class="flex flex-col gap-space-2xs">
+<div class="flex items-center gap-space-sm flex-wrap">
+<span class="font-label-sm text-label-sm uppercase tracking-wider px-space-xs py-space-2xs rounded bg-surface-container-high text-primary font-semibold flex items-center gap-1">
+<span class="inline-block w-1.5 h-1.5 rounded-full bg-primary animate-pulse"></span>
+          Terminal BaaS Activo
+        </span>
+<span class="font-label-sm text-label-sm text-on-surface-variant flex items-center gap-1">
+<span class="material-symbols-outlined text-[16px] text-outline">speed</span>
+          Latencia API 24ms
+        </span>
+<span class="text-outline-variant font-label-sm">•</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant flex items-center gap-1">
+<span class="material-symbols-outlined text-[16px] text-tertiary">devices</span>
+          3 Dispositivos Sincronizados
+        </span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant">
+        Monitor de fugas financieras y pasarela de orquestación de cuotas
+      </p>
+</div>
+<!-- Quick Action Launcher Trigger -->
+<div class="flex items-center gap-space-sm">
+<button class="group flex items-center gap-space-sm px-space-md py-space-xs rounded-xl bg-primary text-on-primary font-label-lg text-label-lg shadow-lg hover:shadow-primary/25 hover:bg-primary-fixed-dim transition-all" id="open-quick-modal" type="button">
+<span class="material-symbols-outlined text-[20px]">bolt</span>
+<span>Registro Fricción Cero</span>
+<kbd class="hidden sm:inline-block px-1.5 py-0.5 rounded bg-on-primary/15 text-on-primary text-[10px] tracking-wider uppercase font-mono">⌘K</kbd>
+</button>
+<button class="p-space-xs rounded-xl bg-surface-container-high text-on-surface-variant hover:text-on-surface hover:bg-surface-variant transition-colors" onclick="refreshTelemetry()" title="Refrescar Telemetría" type="button">
+<span class="material-symbols-outlined text-[20px]" id="refresh-icon">autorenew</span>
+</button>
+</div>
+</div>
+<!-- Key Financial Metrics Cards Grid -->
+<section class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-space-md mb-space-xl">
+<!-- Card 1: Saldo Disponible -->
+<div class="relative overflow-hidden rounded-xl bg-surface-container-low p-space-lg shadow-md flex flex-col justify-between">
+<div class="absolute -right-6 -bottom-6 w-24 h-24 rounded-full bg-primary/10 blur-xl pointer-events-none"></div>
+<div class="flex items-start justify-between">
+<div class="flex flex-col">
+<span class="font-label-sm text-label-sm uppercase tracking-wider text-outline font-semibold">Saldo Disponible</span>
+<span class="font-display text-[2.25rem] leading-none text-on-surface font-extrabold mt-space-2xs">$142,500.00</span>
+</div>
+<div class="p-space-xs rounded-lg bg-surface-container-high text-primary">
+<span class="material-symbols-outlined text-[22px]">account_balance_wallet</span>
+</div>
+</div>
+<div class="flex items-center justify-between mt-space-md pt-space-xs">
+<span class="inline-flex items-center gap-1 font-label-sm text-label-sm text-primary px-2 py-0.5 rounded-full bg-primary/10 font-bold">
+<span class="material-symbols-outlined text-[14px]">trending_up</span> +18.4%
+        </span>
+<span class="font-label-sm text-label-sm text-outline">vs. mes anterior</span>
+</div>
+<!-- Sparkline svg -->
+<div class="w-full h-8 mt-space-xs">
+<svg class="w-full h-full text-primary" fill="none" preserveaspectratio="none" viewbox="0 0 100 24">
+<path d="M0,18 Q20,16 35,10 T65,8 T100,2" stroke="currentColor" stroke-linecap="round" stroke-width="2.5"></path>
+<path d="M0,18 Q20,16 35,10 T65,8 T100,2 L100,24 L0,24 Z" fill="currentColor" fill-opacity="0.08"></path>
+</svg>
+</div>
+</div>
+<!-- Card 2: Fugas Detectadas -->
+<div class="relative overflow-hidden rounded-xl bg-surface-container-low p-space-lg shadow-md flex flex-col justify-between">
+<div class="absolute -right-6 -bottom-6 w-24 h-24 rounded-full bg-secondary-container/20 blur-xl pointer-events-none"></div>
+<div class="flex items-start justify-between">
+<div class="flex flex-col">
+<span class="font-label-sm text-label-sm uppercase tracking-wider text-secondary font-semibold flex items-center gap-1">
+<span class="material-symbols-outlined text-[16px]">water_drop</span>
+            Fugas Activas (Mes)
+          </span>
+<span class="font-display text-[2.25rem] leading-none text-secondary font-extrabold mt-space-2xs">$8,450.00</span>
+</div>
+<div class="p-space-xs rounded-lg bg-secondary-container/20 text-secondary">
+<span class="material-symbols-outlined text-[22px]">warning</span>
+</div>
+</div>
+<div class="flex items-center justify-between mt-space-md pt-space-xs">
+<span class="inline-flex items-center gap-1 font-label-sm text-label-sm text-secondary px-2 py-0.5 rounded-full bg-secondary-container/20 font-bold">
+          3 fugas críticas
+        </span>
+<span class="font-label-sm text-label-sm text-outline">Gasto hormiga 5.9%</span>
+</div>
+<div class="w-full h-8 mt-space-xs">
+<svg class="w-full h-full text-secondary" fill="none" preserveaspectratio="none" viewbox="0 0 100 24">
+<path d="M0,6 Q25,8 45,18 T75,12 T100,20" stroke="currentColor" stroke-linecap="round" stroke-width="2.5"></path>
+<path d="M0,6 Q25,8 45,18 T75,12 T100,20 L100,24 L0,24 Z" fill="currentColor" fill-opacity="0.12"></path>
+</svg>
+</div>
+</div>
+<!-- Card 3: Capital Blindado -->
+<div class="relative overflow-hidden rounded-xl bg-surface-container-low p-space-lg shadow-md flex flex-col justify-between">
+<div class="absolute -right-6 -bottom-6 w-24 h-24 rounded-full bg-tertiary-container/15 blur-xl pointer-events-none"></div>
+<div class="flex items-start justify-between">
+<div class="flex flex-col">
+<span class="font-label-sm text-label-sm uppercase tracking-wider text-outline font-semibold">Blindado &amp; Amortizado</span>
+<span class="font-display text-[2.25rem] leading-none text-on-surface font-extrabold mt-space-2xs">$48,200.00</span>
+</div>
+<div class="p-space-xs rounded-lg bg-surface-container-high text-tertiary-fixed-dim">
+<span class="material-symbols-outlined text-[22px]">shield</span>
+</div>
+</div>
+<div class="flex items-center justify-between mt-space-md pt-space-xs">
+<span class="inline-flex items-center gap-1 font-label-sm text-label-sm text-tertiary px-2 py-0.5 rounded-full bg-tertiary-container/20 font-bold">
+<span class="material-symbols-outlined text-[14px]">lock_reset</span> 12 Cuotas Salvas
+        </span>
+<span class="font-label-sm text-label-sm text-outline">Tasa segura 1.1%</span>
+</div>
+<div class="w-full h-8 mt-space-xs">
+<svg class="w-full h-full text-tertiary-fixed-dim" fill="none" preserveaspectratio="none" viewbox="0 0 100 24">
+<path d="M0,22 Q30,20 50,14 T80,8 T100,4" stroke="currentColor" stroke-linecap="round" stroke-width="2.5"></path>
+<path d="M0,22 Q30,20 50,14 T80,8 T100,4 L100,24 L0,24 Z" fill="currentColor" fill-opacity="0.08"></path>
+</svg>
+</div>
+</div>
+<!-- Card 4: Consumo BaaS -->
+<div class="relative overflow-hidden rounded-xl bg-surface-container-low p-space-lg shadow-md flex flex-col justify-between">
+<div class="flex items-start justify-between">
+<div class="flex flex-col">
+<span class="font-label-sm text-label-sm uppercase tracking-wider text-outline font-semibold">Tráfico BaaS (AppSheet/Bot)</span>
+<span class="font-display text-[2.25rem] leading-none text-on-surface font-extrabold mt-space-2xs">1,842</span>
+</div>
+<div class="p-space-xs rounded-lg bg-surface-container-high text-primary">
+<span class="material-symbols-outlined text-[22px]">hub</span>
+</div>
+</div>
+<div class="flex items-center justify-between mt-space-md pt-space-xs">
+<span class="font-label-sm text-label-sm text-outline">36.8% de cuota mensual</span>
+<span class="font-label-sm text-label-sm text-on-surface font-semibold">5,000 req max</span>
+</div>
+<div class="w-full bg-surface-container-high rounded-full h-2 mt-space-xs overflow-hidden">
+<div class="bg-primary h-2 rounded-full transition-all duration-500" style="width: 36.8%"></div>
+</div>
+</div>
+</section>
+<!-- Core Content: 60/40 Asymmetric Workspace -->
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-space-lg mb-space-xl">
+<!-- LEFT COLUMN (60% ~ 7 cols) -->
+<div class="lg:col-span-7 flex flex-col gap-space-lg">
+<!-- RADAR DE FUGAS CARD -->
+<div class="rounded-xl bg-surface-container-low p-space-lg shadow-md">
+<div class="flex items-center justify-between pb-space-md">
+<div class="flex items-center gap-space-sm">
+<span class="p-space-xs rounded-lg bg-secondary-container/20 text-secondary">
+<span class="material-symbols-outlined text-[20px]">troubleshoot</span>
+</span>
+<div>
+<h2 class="font-headline-sm text-headline-sm text-on-surface">Radar de Fugas &amp; Gasto Hormiga</h2>
+<p class="font-label-sm text-label-sm text-outline">Algoritmo heurístico sobre débitos no catalogados</p>
+</div>
+</div>
+<span class="font-label-xs text-label-sm px-2.5 py-1 rounded-full bg-secondary-container/25 text-secondary font-bold uppercase tracking-wider">
+            3 Por Resolver
+          </span>
+</div>
+<!-- Leaks list -->
+<div class="flex flex-col gap-space-sm mt-space-xs" id="leaks-container">
+<!-- Leak 1 -->
+<div class="flex flex-col sm:flex-row sm:items-center justify-between p-space-md rounded-xl bg-surface-container gap-space-sm">
+<div class="flex items-center gap-space-sm">
+<div class="w-10 h-10 rounded-full bg-surface-container-high flex items-center justify-center text-secondary">
+<span class="material-symbols-outlined text-[20px]">local_cafe</span>
+</div>
+<div class="flex flex-col">
+<div class="flex items-center gap-space-xs">
+<span class="font-label-lg text-label-lg text-on-surface">Starbucks Reserve x 12</span>
+<span class="font-label-sm text-label-sm text-secondary bg-secondary-container/15 px-1.5 py-0.5 rounded font-semibold">Recurrente</span>
+</div>
+<span class="font-body-sm text-body-sm text-on-surface-variant">Micropago café de oficina • 4 veces por semana</span>
+</div>
+</div>
+<div class="flex sm:flex-col items-center sm:items-end justify-between sm:justify-center gap-space-xs">
+<span class="font-headline-sm text-headline-sm text-secondary font-bold">-$1,440.00</span>
+<button class="px-space-sm py-1 rounded bg-primary text-on-primary font-label-sm text-label-sm font-bold shadow hover:bg-primary-fixed-dim transition-colors flex items-center gap-1" onclick="plugLeak(this, 'Starbucks Reserve')" type="button">
+<span class="material-symbols-outlined text-[14px]">handyman</span> Sellar Fuga
+              </button>
+</div>
+</div>
+<!-- Leak 2 -->
+<div class="flex flex-col sm:flex-row sm:items-center justify-between p-space-md rounded-xl bg-surface-container gap-space-sm">
+<div class="flex items-center gap-space-sm">
+<div class="w-10 h-10 rounded-full bg-surface-container-high flex items-center justify-center text-secondary">
+<span class="material-symbols-outlined text-[20px]">subscriptions</span>
+</div>
+<div class="flex flex-col">
+<div class="flex items-center gap-space-xs">
+<span class="font-label-lg text-label-lg text-on-surface">Suscripción Desatendida (SaaS Cloud)</span>
+<span class="font-label-sm text-label-sm text-secondary bg-secondary-container/15 px-1.5 py-0.5 rounded font-semibold">Sin Uso 42d</span>
+</div>
+<span class="font-body-sm text-body-sm text-on-surface-variant">Cobro automático vía tarjeta Visa Virtual</span>
+</div>
+</div>
+<div class="flex sm:flex-col items-center sm:items-end justify-between sm:justify-center gap-space-xs">
+<span class="font-headline-sm text-headline-sm text-secondary font-bold">-$890.00</span>
+<button class="px-space-sm py-1 rounded bg-primary text-on-primary font-label-sm text-label-sm font-bold shadow hover:bg-primary-fixed-dim transition-colors flex items-center gap-1" onclick="plugLeak(this, 'SaaS Cloud')" type="button">
+<span class="material-symbols-outlined text-[14px]">handyman</span> Sellar Fuga
+              </button>
+</div>
+</div>
+<!-- Leak 3 -->
+<div class="flex flex-col sm:flex-row sm:items-center justify-between p-space-md rounded-xl bg-surface-container gap-space-sm">
+<div class="flex items-center gap-space-sm">
+<div class="w-10 h-10 rounded-full bg-surface-container-high flex items-center justify-center text-secondary">
+<span class="material-symbols-outlined text-[20px]">moped</span>
+</div>
+<div class="flex flex-col">
+<div class="flex items-center gap-space-xs">
+<span class="font-label-lg text-label-lg text-on-surface">Delivery Express &amp; Tips</span>
+<span class="font-label-sm text-label-sm text-secondary bg-secondary-container/15 px-1.5 py-0.5 rounded font-semibold">Exceso 34%</span>
+</div>
+<span class="font-body-sm text-body-sm text-on-surface-variant">Pedidos nocturnos con recargo de plataforma</span>
+</div>
+</div>
+<div class="flex sm:flex-col items-center sm:items-end justify-between sm:justify-center gap-space-xs">
+<span class="font-headline-sm text-headline-sm text-secondary font-bold">-$2,120.00</span>
+<button class="px-space-sm py-1 rounded bg-primary text-on-primary font-label-sm text-label-sm font-bold shadow hover:bg-primary-fixed-dim transition-colors flex items-center gap-1" onclick="plugLeak(this, 'Delivery Express')" type="button">
+<span class="material-symbols-outlined text-[14px]">handyman</span> Sellar Fuga
+              </button>
+</div>
+</div>
+</div>
+<div class="mt-space-md p-space-sm rounded-lg bg-surface-container-high/60 flex items-center justify-between">
+<span class="font-label-sm text-label-sm text-outline">Ahorro potencial consolidado al sellar fugas activas:</span>
+<span class="font-label-lg text-label-lg text-primary font-bold">+$4,450.00 / mes</span>
+</div>
+</div>
+<!-- REPARTO PRESUPUESTARIO 50/30/20 & CASH FLOW PROYECTADO -->
+<div class="rounded-xl bg-surface-container-low p-space-lg shadow-md flex flex-col gap-space-md">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-space-sm">
+<span class="p-space-xs rounded-lg bg-surface-container-high text-primary">
+<span class="material-symbols-outlined text-[20px]">pie_chart</span>
+</span>
+<div>
+<h2 class="font-headline-sm text-headline-sm text-on-surface">Regla 50 / 30 / 20 &amp; Despliegue de Liquidez</h2>
+<p class="font-label-sm text-label-sm text-outline">Monitoreo dinámico del ciclo en curso</p>
+</div>
+</div>
+<div class="flex items-center gap-space-xs bg-surface-container px-space-xs py-1 rounded-lg">
+<button class="px-space-xs py-0.5 rounded font-label-sm text-label-sm bg-surface-container-highest text-on-surface font-semibold" type="button">Mes Actual</button>
+<button class="px-space-xs py-0.5 rounded font-label-sm text-label-sm text-on-surface-variant hover:text-on-surface" type="button">Trimestre</button>
+</div>
+</div>
+<!-- Visual Multi-segment Bar -->
+<div class="w-full flex flex-col gap-space-xs">
+<div class="flex items-center justify-between font-label-sm text-label-sm">
+<span class="text-on-surface">Distribución Ejecutada vs Techo Límite</span>
+<span class="text-primary font-bold">Consumo Óptimo (78% de cupo global)</span>
+</div>
+<div class="w-full h-4 rounded-full bg-surface-container-high flex overflow-hidden p-0.5">
+<div class="bg-outline rounded-l-full h-full transition-all duration-300" style="width: 48%" title="50% Necesidades"></div>
+<div class="bg-secondary rounded-none h-full transition-all duration-300 mx-0.5" style="width: 27%" title="30% Deseos"></div>
+<div class="bg-primary rounded-r-full h-full transition-all duration-300" style="width: 25%" title="20% Ahorro e Inversión"></div>
+</div>
+</div>
+<!-- 3 Pillars breakdown -->
+<div class="grid grid-cols-1 md:grid-cols-3 gap-space-sm pt-space-xs">
+<!-- Pillar 1: 50% Necesidades -->
+<div class="p-space-md rounded-xl bg-surface-container flex flex-col gap-space-2xs">
+<div class="flex items-center justify-between">
+<span class="font-label-sm text-label-sm text-outline font-semibold">Necesidades (50%)</span>
+<span class="w-2.5 h-2.5 rounded-full bg-outline"></span>
+</div>
+<span class="font-data-metric text-data-metric text-on-surface">$54,200</span>
+<div class="flex items-center justify-between font-label-sm text-label-sm text-on-surface-variant">
+<span>Tope: $55,000</span>
+<span class="text-primary font-semibold">98.5%</span>
+</div>
+</div>
+<!-- Pillar 2: 30% Deseos -->
+<div class="p-space-md rounded-xl bg-surface-container flex flex-col gap-space-2xs">
+<div class="flex items-center justify-between">
+<span class="font-label-sm text-label-sm text-outline font-semibold">Deseos &amp; Ocio (30%)</span>
+<span class="w-2.5 h-2.5 rounded-full bg-secondary"></span>
+</div>
+<span class="font-data-metric text-data-metric text-secondary">$32,150</span>
+<div class="flex items-center justify-between font-label-sm text-label-sm text-on-surface-variant">
+<span>Tope: $33,000</span>
+<span class="text-secondary font-semibold">97.4%</span>
+</div>
+</div>
+<!-- Pillar 3: 20% Ahorro -->
+<div class="p-space-md rounded-xl bg-surface-container flex flex-col gap-space-2xs">
+<div class="flex items-center justify-between">
+<span class="font-label-sm text-label-sm text-outline font-semibold">Ahorro / Cuotas (20%)</span>
+<span class="w-2.5 h-2.5 rounded-full bg-primary"></span>
+</div>
+<span class="font-data-metric text-data-metric text-primary">$24,800</span>
+<div class="flex items-center justify-between font-label-sm text-label-sm text-on-surface-variant">
+<span>Meta: $22,000</span>
+<span class="text-primary font-semibold">+112%</span>
+</div>
+</div>
+</div>
+<!-- In-context Cash Projection SVG Canvas -->
+<div class="p-space-md rounded-xl bg-surface-container flex flex-col gap-space-xs mt-space-2xs">
+<div class="flex items-center justify-between font-label-sm text-label-sm">
+<span class="text-on-surface-variant font-medium">Curva de Saldo Proyectado a Cierre de Quincena</span>
+<span class="text-primary font-semibold">Proyección Segura: $128,400.00</span>
+</div>
+<div class="w-full h-24">
+<svg class="w-full h-full text-primary" fill="none" viewbox="0 0 500 90">
+<!-- Grid lines -->
+<line stroke="currentColor" stroke-dasharray="4 4" stroke-opacity="0.08" x1="0" x2="500" y1="20" y2="20"></line>
+<line stroke="currentColor" stroke-dasharray="4 4" stroke-opacity="0.08" x1="0" x2="500" y1="50" y2="50"></line>
+<line stroke="currentColor" stroke-dasharray="4 4" stroke-opacity="0.08" x1="0" x2="500" y1="80" y2="80"></line>
+<!-- Safe projection area -->
+<path d="M0,35 C100,30 180,55 260,40 C340,25 420,15 500,20 L500,90 L0,90 Z" fill="currentColor" fill-opacity="0.06"></path>
+<path d="M0,35 C100,30 180,55 260,40 C340,25 420,15 500,20" stroke="currentColor" stroke-linecap="round" stroke-width="2.5"></path>
+<!-- Alert divergence point -->
+<circle cx="260" cy="40" fill="#00e599" r="4"></circle>
+<circle cx="500" cy="20" fill="#00e599" r="4"></circle>
+</svg>
+</div>
+</div>
+</div>
+</div>
+<!-- RIGHT COLUMN (40% ~ 5 cols) -->
+<div class="lg:col-span-5 flex flex-col gap-space-lg">
+<!-- MOTOR DE CUOTAS / SIMULADOR EN VIVO -->
+<div class="rounded-xl bg-surface-container-low p-space-lg shadow-md flex flex-col gap-space-md">
+<div class="flex items-center justify-between pb-space-2xs">
+<div class="flex items-center gap-space-sm">
+<span class="p-space-xs rounded-lg bg-surface-container-high text-primary">
+<span class="material-symbols-outlined text-[20px]">credit_card</span>
+</span>
+<div>
+<h2 class="font-headline-sm text-headline-sm text-on-surface">Simulador de Cuotas &amp; Tasa EA</h2>
+<p class="font-label-sm text-label-sm text-outline">Amortización francesa en tiempo real</p>
+</div>
+</div>
+<span class="font-label-sm text-label-sm text-primary font-bold bg-primary/10 px-2 py-0.5 rounded">
+            Auto-amortizar
+          </span>
+</div>
+<!-- Selector de Tarjeta -->
+<div class="flex flex-col gap-space-2xs">
+<label class="font-label-sm text-label-sm text-outline font-semibold">Tarjeta / Pasarela Activa</label>
+<div class="relative">
+<select class="w-full bg-surface-container text-on-surface px-space-md py-space-sm rounded-lg font-label-md text-label-md appearance-none focus:outline-none focus:ring-1 focus:ring-primary" id="card-selector" onchange="updateInstallmentSim()">
+<option data-name="Visa Signature Bancolombia" value="28.5">Visa Signature • EA: 28.50% (2.11% TEM)</option>
+<option data-name="Mastercard Black NuBank" value="24.8">Mastercard Black Nu • EA: 24.80% (1.87% TEM)</option>
+<option data-name="Amex Platinum" value="31.2">Amex Blue / Corporativa • EA: 31.20% (2.28% TEM)</option>
+<option data-name="Tasa Cero Alianzas" value="0.0">Tasa 0% Cuotas Sin Interés</option>
+</select>
+<span class="material-symbols-outlined absolute right-3 top-3 text-[18px] text-outline pointer-events-none">expand_more</span>
+</div>
+</div>
+<!-- Monto de la Compra -->
+<div class="flex flex-col gap-space-2xs">
+<label class="font-label-sm text-label-sm text-outline font-semibold">Monto de la Compra a Diferir</label>
+<div class="relative">
+<span class="absolute left-3 top-2.5 font-mono text-outline font-semibold">$</span>
+<input class="w-full bg-surface-container text-on-surface pl-8 pr-space-md py-space-sm rounded-lg font-data-metric text-data-metric focus:outline-none focus:ring-1 focus:ring-primary" id="sim-amount" oninput="updateInstallmentSim()" type="number" value="3500000"/>
+</div>
+</div>
+<!-- Slider de Cuotas -->
+<div class="flex flex-col gap-space-xs pt-space-2xs">
+<div class="flex items-center justify-between font-label-sm text-label-sm">
+<span class="text-outline">Número de Cuotas</span>
+<span class="text-on-surface font-headline-sm text-headline-sm text-primary font-bold" id="installment-months-label">12 meses</span>
+</div>
+<input class="w-full accent-primary h-2 bg-surface-container-high rounded-lg cursor-pointer" id="installment-months" max="36" min="1" oninput="updateInstallmentSim()" type="range" value="12"/>
+<div class="flex justify-between text-[11px] font-mono text-outline">
+<span>1 m (Sin interés)</span>
+<span>12 m</span>
+<span>24 m</span>
+<span>36 m</span>
+</div>
+</div>
+<!-- Resultado Amortización Caja Resumen -->
+<div class="p-space-md rounded-xl bg-surface-container flex flex-col gap-space-sm">
+<div class="flex items-center justify-between">
+<span class="font-label-sm text-label-sm text-outline">Cuota Mensual Estimada:</span>
+<span class="font-headline-sm text-headline-sm text-primary font-extrabold" id="monthly-fee-display">$333,870.00</span>
+</div>
+<div class="flex items-center justify-between text-[12px] text-on-surface-variant pt-space-2xs border-t border-outline-variant/20">
+<span>Total Intereses al Diferir:</span>
+<span class="font-semibold text-secondary" id="total-interest-display">+$506,440.00</span>
+</div>
+<div class="flex items-center justify-between text-[12px] text-on-surface-variant">
+<span>Sobrecosto Financiero:</span>
+<span class="font-semibold text-secondary" id="surcharge-percent-display">+14.47%</span>
+</div>
+</div>
+<button class="w-full py-space-sm rounded-lg bg-surface-container-high text-on-surface hover:bg-surface-container-highest hover:text-primary font-label-md text-label-md transition-colors flex items-center justify-center gap-space-xs" type="button">
+<span class="material-symbols-outlined text-[18px]">bookmark_add</span>
+<span>Fijar Cuota en Presupuesto Pasivo</span>
+</button>
+</div>
+<!-- TERMINAL DE INTEGRACIONES BAAS & BOT TELEGRAM -->
+<div class="rounded-xl bg-surface-container-low p-space-lg shadow-md flex flex-col gap-space-md">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-space-sm">
+<span class="p-space-xs rounded-lg bg-surface-container-high text-primary">
+<span class="material-symbols-outlined text-[20px]">terminal</span>
+</span>
+<div>
+<h2 class="font-headline-sm text-headline-sm text-on-surface">Terminal Integración BaaS</h2>
+<p class="font-label-sm text-label-sm text-outline">Webhook &amp; Conectores AppSheet / Telegram</p>
+</div>
+</div>
+<span class="w-2 h-2 rounded-full bg-primary animate-ping"></span>
+</div>
+<!-- Telegram Voice Bot Switch -->
+<div class="p-space-sm rounded-lg bg-surface-container flex items-center justify-between">
+<div class="flex items-center gap-space-sm">
+<div class="w-8 h-8 rounded-full bg-surface-container-high flex items-center justify-center text-tertiary">
+<span class="material-symbols-outlined text-[18px]">mic</span>
+</div>
+<div class="flex flex-col">
+<span class="font-label-sm text-label-sm text-on-surface font-semibold">Bot de Telegram (Audio a Gasto)</span>
+<span class="text-[11px] text-outline">Transcripción Whisper + Clasificación AI</span>
+</div>
+</div>
+<label class="relative inline-flex items-center cursor-pointer">
+<input checked="" class="sr-only peer" id="telegram-switch" onchange="toggleTelegramFeed(this)" type="checkbox"/>
+<div class="w-9 h-5 bg-surface-container-highest peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-on-primary after:border-gray-300 after:border after:rounded-full after:h-4 after:w-4 after:transition-all peer-checked:bg-primary"></div>
+</label>
+</div>
+<!-- AppSheet Webhook Snippet -->
+<div class="flex flex-col gap-space-2xs">
+<div class="flex items-center justify-between">
+<span class="font-label-sm text-label-sm text-outline font-semibold">Endpoint BaaS Recaudador</span>
+<button class="font-label-sm text-label-sm text-primary hover:underline flex items-center gap-1" onclick="copyToken('https://api.bolsilloroto.io/v2/ingest/prod_key_7781')" type="button">
+<span class="material-symbols-outlined text-[14px]">content_copy</span> Copiar URL
+            </button>
+</div>
+<div class="bg-surface-container-lowest p-space-sm rounded-lg font-mono text-[11px] text-on-surface-variant break-all select-all flex items-center justify-between">
+<span>https://api.bolsilloroto.io/v2/ingest/prod_key_7781</span>
+<span class="material-symbols-outlined text-outline text-[16px] ml-2">lock</span>
+</div>
+</div>
+<!-- Token Header -->
+<div class="flex flex-col gap-space-2xs">
+<div class="flex items-center justify-between">
+<span class="font-label-sm text-label-sm text-outline font-semibold">Authorization Bearer Header</span>
+<button class="font-label-sm text-label-sm text-primary hover:underline flex items-center gap-1" onclick="copyToken('br_live_948f2c019d3e89a247')" type="button">
+<span class="material-symbols-outlined text-[14px]">content_copy</span> Copiar Key
+            </button>
+</div>
+<div class="bg-surface-container-lowest p-space-sm rounded-lg font-mono text-[11px] text-primary break-all flex items-center justify-between">
+<span>Bearer br_live_••••••••••••••••••••89a247</span>
+<span class="font-label-sm text-label-sm text-outline">expira en 84d</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- SECCIÓN: TABLA DE TRANSACCIONES RECIENTES -->
+<section class="rounded-xl bg-surface-container-low p-space-lg shadow-md flex flex-col gap-space-md">
+<div class="flex flex-col md:flex-row md:items-center justify-between gap-space-sm">
+<div>
+<h2 class="font-headline-sm text-headline-sm text-on-surface">Transacciones &amp; Sincronización Multicanal</h2>
+<p class="font-label-sm text-label-sm text-outline">Transmisiones capturadas por endpoints BaaS, Telegram y PWA</p>
+</div>
+<div class="flex items-center gap-space-xs flex-wrap">
+<button class="filter-btn px-space-sm py-1 rounded-lg bg-surface-container-high text-on-surface font-label-sm text-label-sm font-semibold hover:bg-surface-container-highest transition-colors" onclick="filterSource('all')" type="button">Todos</button>
+<button class="filter-btn px-space-sm py-1 rounded-lg bg-surface-container text-on-surface-variant font-label-sm text-label-sm hover:text-on-surface transition-colors" onclick="filterSource('AppSheet')" type="button">AppSheet</button>
+<button class="filter-btn px-space-sm py-1 rounded-lg bg-surface-container text-on-surface-variant font-label-sm text-label-sm hover:text-on-surface transition-colors" onclick="filterSource('Telegram Audio')" type="button">Telegram Audio</button>
+<button class="filter-btn px-space-sm py-1 rounded-lg bg-surface-container text-on-surface-variant font-label-sm text-label-sm hover:text-on-surface transition-colors" onclick="filterSource('Widget')" type="button">Widget Móvil</button>
+</div>
+</div>
+<!-- Table Container -->
+<div class="overflow-x-auto w-full">
+<table class="w-full text-left border-collapse">
+<thead>
+<tr class="text-outline font-label-sm text-label-sm border-b border-outline-variant/30">
+<th class="py-space-sm px-space-md font-semibold">Detalle &amp; Categoría</th>
+<th class="py-space-sm px-space-md font-semibold">Canal / Origen BaaS</th>
+<th class="py-space-sm px-space-md font-semibold">Fecha &amp; Timestamp</th>
+<th class="py-space-sm px-space-md font-semibold text-right">Monto</th>
+<th class="py-space-sm px-space-md font-semibold text-right">Estado</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-outline-variant/20 font-body-sm text-body-sm" id="tx-table-body">
+<!-- Row 1 -->
+<tr class="hover:bg-surface-container/60 transition-colors" data-source="Telegram Audio">
+<td class="py-space-md px-space-md">
+<div class="flex items-center gap-space-sm">
+<div class="w-8 h-8 rounded-full bg-surface-container-high flex items-center justify-center text-primary">
+<span class="material-symbols-outlined text-[16px]">shopping_cart</span>
+</div>
+<div class="flex flex-col">
+<span class="font-label-md text-label-md text-on-surface font-semibold">Supermercado Éxito Express</span>
+<span class="font-label-sm text-label-sm text-outline">Alimentación / Necesidad</span>
+</div>
+</div>
+</td>
+<td class="py-space-md px-space-md">
+<span class="inline-flex items-center gap-1 font-label-sm text-label-sm px-2 py-0.5 rounded-full bg-tertiary-container/20 text-tertiary font-medium">
+<span class="material-symbols-outlined text-[14px]">graphic_eq</span> Telegram Audio
+              </span>
+</td>
+<td class="py-space-md px-space-md font-mono text-[12px] text-on-surface-variant">
+              Hoy, 14:32:10
+            </td>
+<td class="py-space-md px-space-md text-right font-headline-sm text-headline-sm text-on-surface font-bold">
+              -$148,200.00
+            </td>
+<td class="py-space-md px-space-md text-right">
+<span class="font-label-sm text-label-sm text-primary bg-primary/10 px-2 py-0.5 rounded font-bold">Sincronizado</span>
+</td>
+</tr>
+<!-- Row 2 -->
+<tr class="hover:bg-surface-container/60 transition-colors" data-source="AppSheet">
+<td class="py-space-md px-space-md">
+<div class="flex items-center gap-space-sm">
+<div class="w-8 h-8 rounded-full bg-secondary-container/20 flex items-center justify-center text-secondary">
+<span class="material-symbols-outlined text-[16px]">local_bar</span>
+</div>
+<div class="flex flex-col">
+<span class="font-label-md text-label-md text-on-surface font-semibold">Bar El Observatorio (Cocktails)</span>
+<span class="font-label-sm text-label-sm text-secondary">Fuga / Deseo No Planificado</span>
+</div>
+</div>
+</td>
+<td class="py-space-md px-space-md">
+<span class="inline-flex items-center gap-1 font-label-sm text-label-sm px-2 py-0.5 rounded-full bg-surface-container-high text-on-surface font-medium">
+<span class="material-symbols-outlined text-[14px]">apps</span> AppSheet Form
+              </span>
+</td>
+<td class="py-space-md px-space-md font-mono text-[12px] text-on-surface-variant">
+              Ayer, 23:18:04
+            </td>
+<td class="py-space-md px-space-md text-right font-headline-sm text-headline-sm text-secondary font-bold">
+              -$84,000.00
+            </td>
+<td class="py-space-md px-space-md text-right">
+<span class="font-label-sm text-label-sm text-secondary bg-secondary-container/15 px-2 py-0.5 rounded font-bold">Alerta Fuga</span>
+</td>
+</tr>
+<!-- Row 3 -->
+<tr class="hover:bg-surface-container/60 transition-colors" data-source="Widget">
+<td class="py-space-md px-space-md">
+<div class="flex items-center gap-space-sm">
+<div class="w-8 h-8 rounded-full bg-primary/20 flex items-center justify-center text-primary">
+<span class="material-symbols-outlined text-[16px]">payments</span>
+</div>
+<div class="flex flex-col">
+<span class="font-label-md text-label-md text-on-surface font-semibold">Depósito Honorarios Freelance</span>
+<span class="font-label-sm text-label-sm text-primary">Ingreso / Flujo Activo</span>
+</div>
+</div>
+</td>
+<td class="py-space-md px-space-md">
+<span class="inline-flex items-center gap-1 font-label-sm text-label-sm px-2 py-0.5 rounded-full bg-surface-container-high text-on-surface font-medium">
+<span class="material-symbols-outlined text-[14px]">smartphone</span> Widget Móvil
+              </span>
+</td>
+<td class="py-space-md px-space-md font-mono text-[12px] text-on-surface-variant">
+              12 Oct, 09:15:22
+            </td>
+<td class="py-space-md px-space-md text-right font-headline-sm text-headline-sm text-primary font-bold">
+              +$8,500,000.00
+            </td>
+<td class="py-space-md px-space-md text-right">
+<span class="font-label-sm text-label-sm text-primary bg-primary/10 px-2 py-0.5 rounded font-bold">Verificado</span>
+</td>
+</tr>
+<!-- Row 4 -->
+<tr class="hover:bg-surface-container/60 transition-colors" data-source="AppSheet">
+<td class="py-space-md px-space-md">
+<div class="flex items-center gap-space-sm">
+<div class="w-8 h-8 rounded-full bg-surface-container-high flex items-center justify-center text-tertiary">
+<span class="material-symbols-outlined text-[16px]">directions_car</span>
+</div>
+<div class="flex flex-col">
+<span class="font-label-md text-label-md text-on-surface font-semibold">Gasolina Primax Premium</span>
+<span class="font-label-sm text-label-sm text-outline">Transporte / Necesidad</span>
+</div>
+</div>
+</td>
+<td class="py-space-md px-space-md">
+<span class="inline-flex items-center gap-1 font-label-sm text-label-sm px-2 py-0.5 rounded-full bg-surface-container-high text-on-surface font-medium">
+<span class="material-symbols-outlined text-[14px]">apps</span> AppSheet Form
+              </span>
+</td>
+<td class="py-space-md px-space-md font-mono text-[12px] text-on-surface-variant">
+              11 Oct, 18:40:02
+            </td>
+<td class="py-space-md px-space-md text-right font-headline-sm text-headline-sm text-on-surface font-bold">
+              -$110,000.00
+            </td>
+<td class="py-space-md px-space-md text-right">
+<span class="font-label-sm text-label-sm text-primary bg-primary/10 px-2 py-0.5 rounded font-bold">Sincronizado</span>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<!-- MODAL: REGISTRO RÁPIDO FRICCIÓN CERO (Cmd+K) -->
+<div class="fixed inset-0 z-50 flex items-center justify-center bg-surface-dim/80 backdrop-blur-md hidden p-space-md" id="quick-entry-modal">
+<div class="relative w-full max-w-lg rounded-2xl bg-surface-container-low p-space-xl shadow-2xl flex flex-col gap-space-md">
+<!-- Modal Header -->
+<div class="flex items-center justify-between border-b border-outline-variant/30 pb-space-sm">
+<div class="flex items-center gap-space-sm">
+<span class="p-space-xs rounded-lg bg-primary/10 text-primary">
+<span class="material-symbols-outlined text-[22px]">bolt</span>
+</span>
+<div>
+<h3 class="font-headline-sm text-headline-sm text-on-surface">Captura Rápida Fricción Cero</h3>
+<p class="font-label-sm text-label-sm text-outline">Inyecta evento directo a la base BaaS</p>
+</div>
+</div>
+<button class="p-space-xs rounded-lg text-outline hover:text-on-surface hover:bg-surface-container transition-colors" id="close-quick-modal" type="button">
+<span class="material-symbols-outlined text-[20px]">close</span>
+</button>
+</div>
+<!-- Quick Form -->
+<form class="flex flex-col gap-space-md" id="quick-entry-form" onsubmit="handleQuickSubmit(event)">
+<!-- Monto -->
+<div class="flex flex-col gap-space-2xs">
+<label class="font-label-sm text-label-sm text-outline font-semibold">Monto del Movimiento</label>
+<div class="relative">
+<span class="absolute left-3.5 top-3 font-mono text-outline font-bold text-lg">$</span>
+<input class="w-full bg-surface-container text-on-surface pl-9 pr-space-md py-space-sm rounded-xl font-headline-sm text-headline-sm focus:outline-none focus:ring-2 focus:ring-primary" id="quick-amount" placeholder="0.00" required="" step="any" type="number"/>
+</div>
+</div>
+<!-- Concepto & Clasificación Rápida -->
+<div class="flex flex-col gap-space-2xs">
+<label class="font-label-sm text-label-sm text-outline font-semibold">Descripción o Concepto</label>
+<input class="w-full bg-surface-container text-on-surface px-space-md py-space-sm rounded-lg font-body-sm text-body-sm focus:outline-none focus:ring-2 focus:ring-primary" id="quick-concept" placeholder="Ej: Café tarde, Combustible, Suscripción..." required="" type="text"/>
+</div>
+<!-- Fuente y Regla 50/30/20 -->
+<div class="grid grid-cols-2 gap-space-sm">
+<div class="flex flex-col gap-space-2xs">
+<label class="font-label-sm text-label-sm text-outline font-semibold">Categoría Presupuestaria</label>
+<select class="w-full bg-surface-container text-on-surface px-space-sm py-space-sm rounded-lg font-label-md text-label-md focus:outline-none focus:ring-1 focus:ring-primary" id="quick-category">
+<option value="necesidad">Necesidad (50%)</option>
+<option value="deseo">Deseo / Ocio (30%)</option>
+<option selected="" value="fuga">Fuga / Hormiga</option>
+<option value="inversion">Inversión / Ahorro (20%)</option>
+</select>
+</div>
+<div class="flex flex-col gap-space-2xs">
+<label class="font-label-sm text-label-sm text-outline font-semibold">Medio de Pago</label>
+<select class="w-full bg-surface-container text-on-surface px-space-sm py-space-sm rounded-lg font-label-md text-label-md focus:outline-none focus:ring-1 focus:ring-primary" id="quick-source">
+<option value="debito">Efectivo / Débito (1 Cuota)</option>
+<option value="credito">Tarjeta Crédito Diferida</option>
+<option value="telegram">Bot Telegram Audio</option>
+</select>
+</div>
+</div>
+<!-- Submit Button -->
+<div class="flex items-center justify-end gap-space-sm pt-space-xs">
+<button class="px-space-md py-space-sm rounded-lg font-label-md text-label-md text-on-surface-variant hover:bg-surface-container transition-colors" id="cancel-quick-modal" type="button">
+            Cancelar
+          </button>
+<button class="px-space-lg py-space-sm rounded-lg bg-primary text-on-primary font-label-md text-label-md font-bold shadow-lg hover:shadow-primary/30 hover:bg-primary-fixed-dim transition-all flex items-center gap-1" type="submit">
+<span class="material-symbols-outlined text-[18px]">add_circle</span>
+            Inyectar Transacción
+          </button>
+</div>
+</form>
+</div>
+</div>
+<!-- Toast Notifier for UX Feedback -->
+<div class="fixed bottom-6 right-6 z-50 transform translate-y-24 opacity-0 transition-all duration-300 pointer-events-none flex items-center gap-space-sm px-space-md py-space-sm rounded-xl bg-surface-container-high text-on-surface shadow-2xl border border-primary/30" id="telemetry-toast">
+<span class="material-symbols-outlined text-primary text-[20px]" id="toast-icon">check_circle</span>
+<span class="font-label-md text-label-md font-semibold" id="toast-message">Operación ejecutada con éxito</span>
+</div>
+</div>
+<script>
+  // Quick Modal Controls
+  const modal = document.getElementById('quick-entry-modal');
+  const openModalBtn = document.getElementById('open-quick-modal');
+  const closeModalBtn = document.getElementById('close-quick-modal');
+  const cancelModalBtn = document.getElementById('cancel-quick-modal');
+
+  function openModal() {
+    if (modal) modal.classList.remove('hidden');
+  }
+  function closeModal() {
+    if (modal) modal.classList.add('hidden');
+  }
+
+  if (openModalBtn) openModalBtn.addEventListener('click', openModal);
+  if (closeModalBtn) closeModalBtn.addEventListener('click', closeModal);
+  if (cancelModalBtn) cancelModalBtn.addEventListener('click', closeModal);
+
+  // Keyboard shortcut Cmd+K or Ctrl+K
+  document.addEventListener('keydown', (e) => {
+    if ((e.metaKey || e.ctrlKey) && e.key.toLowerCase() === 'k') {
+      e.preventDefault();
+      if (modal.classList.contains('hidden')) {
+        openModal();
+      } else {
+        closeModal();
+      }
+    }
+    if (e.key === 'Escape' && !modal.classList.contains('hidden')) {
+      closeModal();
+    }
+  });
+
+  // Toast Functionality
+  function showToast(message, isWarning = false) {
+    const toast = document.getElementById('telemetry-toast');
+    const toastMsg = document.getElementById('toast-message');
+    const toastIcon = document.getElementById('toast-icon');
+    if (!toast) return;
+
+    toastMsg.innerText = message;
+    if (isWarning) {
+      toastIcon.innerText = 'warning';
+      toastIcon.className = 'material-symbols-outlined text-secondary text-[20px]';
+    } else {
+      toastIcon.innerText = 'check_circle';
+      toastIcon.className = 'material-symbols-outlined text-primary text-[20px]';
+    }
+
+    toast.classList.remove('translate-y-24', 'opacity-0');
+    toast.classList.add('translate-y-0', 'opacity-100');
+
+    setTimeout(() => {
+      toast.classList.remove('translate-y-0', 'opacity-100');
+      toast.classList.add('translate-y-24', 'opacity-0');
+    }, 3200);
+  }
+
+  // Plug a leak action
+  window.plugLeak = function(btnElement, leakName) {
+    const parent = btnElement.closest('.flex.flex-col.sm\\:flex-row');
+    if (parent) {
+      parent.style.opacity = '0.35';
+      parent.style.filter = 'grayscale(1)';
+      btnElement.disabled = true;
+      btnElement.innerHTML = '<span class="material-symbols-outlined text-[14px]">done</span> Sellada';
+      btnElement.className = 'px-space-sm py-1 rounded bg-surface-container-high text-outline font-label-sm text-label-sm font-semibold cursor-not-allowed flex items-center gap-1';
+      showToast('Fuga "' + leakName + '" sellada y transferida a reserva.');
+    }
+  };
+
+  // Motor de Cuotas Simulator Calculator
+  window.updateInstallmentSim = function() {
+    const rateSelect = document.getElementById('card-selector');
+    const amountInput = document.getElementById('sim-amount');
+    const monthsInput = document.getElementById('installment-months');
+    const monthsLabel = document.getElementById('installment-months-label');
+    const feeDisplay = document.getElementById('monthly-fee-display');
+    const interestDisplay = document.getElementById('total-interest-display');
+    const surchargeDisplay = document.getElementById('surcharge-percent-display');
+
+    if (!rateSelect || !amountInput || !monthsInput) return;
+
+    const principal = parseFloat(amountInput.value) || 0;
+    const months = parseInt(monthsInput.value, 10);
+    const ea = parseFloat(rateSelect.value) / 100;
+
+    monthsLabel.innerText = months + (months === 1 ? ' mes' : ' meses');
+
+    if (months === 1 || ea === 0 || principal <= 0) {
+      feeDisplay.innerText = '$' + principal.toLocaleString('es-CO', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+      interestDisplay.innerText = '$0.00';
+      surchargeDisplay.innerText = '0.00%';
+      return;
+    }
+
+    // Convert EA to TEM (Tasa Efectiva Mensual): (1 + EA)^(1/12) - 1
+    const tem = Math.pow(1 + ea, 1 / 12) - 1;
+    // French Amortization formula: R = P * ( i / (1 - (1+i)^-n) )
+    const monthlyFee = principal * (tem / (1 - Math.pow(1 + tem, -months)));
+    const totalPaid = monthlyFee * months;
+    const totalInterest = totalPaid - principal;
+    const surchargePercent = (totalInterest / principal) * 100;
+
+    feeDisplay.innerText = '$' + monthlyFee.toLocaleString('es-CO', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+    interestDisplay.innerText = '+$' + totalInterest.toLocaleString('es-CO', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+    surchargeDisplay.innerText = '+' + surchargePercent.toFixed(2) + '%';
+  };
+
+  // Copy token helper
+  window.copyToken = function(textToCopy) {
+    if (navigator.clipboard) {
+      navigator.clipboard.writeText(textToCopy).then(() => {
+        showToast('Credencial copiada al portapapeles');
+      });
+    } else {
+      showToast('Credencial copiada: ' + textToCopy.slice(0, 15) + '...');
+    }
+  };
+
+  // Switch Telegram feed
+  window.toggleTelegramFeed = function(checkbox) {
+    if (checkbox.checked) {
+      showToast('Bot Telegram reactivado: transcribiendo notas de voz.');
+    } else {
+      showToast('Bot Telegram pausado.', true);
+    }
+  };
+
+  // Quick form submit handler
+  window.handleQuickSubmit = function(e) {
+    e.preventDefault();
+    const amount = document.getElementById('quick-amount').value;
+    const concept = document.getElementById('quick-concept').value;
+    const category = document.getElementById('quick-category').value;
+    const source = document.getElementById('quick-source').value;
+
+    const tableBody = document.getElementById('tx-table-body');
+    if (tableBody) {
+      const newRow = document.createElement('tr');
+      newRow.className = 'hover:bg-surface-container/60 transition-colors animate-pulse';
+      newRow.setAttribute('data-source', source === 'telegram' ? 'Telegram Audio' : 'Widget');
+
+      const isNegative = category !== 'inversion';
+      const formattedAmount = (isNegative ? '-$' : '+$') + parseFloat(amount).toLocaleString('es-CO', { minimumFractionDigits: 2 });
+      const colorClass = isNegative ? (category === 'fuga' ? 'text-secondary' : 'text-on-surface') : 'text-primary';
+
+      newRow.innerHTML = `
+        <td class="py-space-md px-space-md">
+          <div class="flex items-center gap-space-sm">
+            <div class="w-8 h-8 rounded-full bg-surface-container-high flex items-center justify-center text-primary">
+              <span class="material-symbols-outlined text-[16px]">bolt</span>
+            </div>
+            <div class="flex flex-col">
+              <span class="font-label-md text-label-md text-on-surface font-semibold">${concept}</span>
+              <span class="font-label-sm text-label-sm text-outline capitalize">${category}</span>
+            </div>
+          </div>
+        </td>
+        <td class="py-space-md px-space-md">
+          <span class="inline-flex items-center gap-1 font-label-sm text-label-sm px-2 py-0.5 rounded-full bg-primary/10 text-primary font-medium">
+            <span class="material-symbols-outlined text-[14px]">flash_on</span> Fricción Cero
+          </span>
+        </td>
+        <td class="py-space-md px-space-md font-mono text-[12px] text-on-surface-variant">
+          Justo ahora
+        </td>
+        <td class="py-space-md px-space-md text-right font-headline-sm text-headline-sm ${colorClass} font-bold">
+          ${formattedAmount}
+        </td>
+        <td class="py-space-md px-space-md text-right">
+          <span class="font-label-sm text-label-sm text-primary bg-primary/10 px-2 py-0.5 rounded font-bold">Inyectado</span>
+        </td>
+      `;
+
+      tableBody.insertBefore(newRow, tableBody.firstChild);
+    }
+
+    closeModal();
+    showToast('Registro de ' + concept + ' agregado a BaaS.');
+    document.getElementById('quick-entry-form').reset();
+  };
+
+  // Filter Table
+  window.filterSource = function(sourceFilter) {
+    const rows = document.querySelectorAll('#tx-table-body tr');
+    rows.forEach(r => {
+      if (sourceFilter === 'all') {
+        r.style.display = '';
+      } else {
+        const sourceAttr = r.getAttribute('data-source');
+        r.style.display = (sourceAttr && sourceAttr.includes(sourceFilter)) ? '' : 'none';
+      }
+    });
+  };
+
+  // Refresh Telemetry Icon Spin
+  window.refreshTelemetry = function() {
+    const icon = document.getElementById('refresh-icon');
+    if (icon) {
+      icon.classList.add('animate-spin');
+      setTimeout(() => {
+        icon.classList.remove('animate-spin');
+        showToast('Nodos BaaS y cuotas re-sincronizados.');
+      }, 700);
+    }
+  };
+
+  // Run initial calculator state
+  updateInstallmentSim();
+</script></main></div></body></html>

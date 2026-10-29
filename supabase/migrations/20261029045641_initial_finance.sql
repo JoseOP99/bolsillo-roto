@@ -1,0 +1,82 @@
+-- Bolsillo Roto: one database, currency in COP, no sensitive card details.
+create schema if not exists private;
+revoke all on schema private from public;
+grant usage on schema private to authenticated;
+create table public.profiles (id uuid primary key references auth.users(id) on delete cascade, display_name text not null default '', currency text not null default 'COP' check(currency='COP'), created_at timestamptz not null default now());
+create table public.devices (session_id uuid primary key, user_id uuid not null references auth.users(id) on delete cascade, label text not null check(length(label)<=180), created_at timestamptz not null default now(), last_seen timestamptz not null default now(), revoked_at timestamptz);
+create index devices_user on public.devices(user_id);
+create function private.session_active() returns boolean language sql stable security invoker set search_path='' as $$ select not exists(select 1 from public.devices where session_id = nullif(auth.jwt()->>'session_id','')::uuid and user_id=auth.uid() and revoked_at is not null) $$;
+create table public.accounts (id uuid primary key default gen_random_uuid(), user_id uuid not null references auth.users(id) on delete cascade, name text not null check(length(name) between 1 and 60), kind text not null check(kind in ('cash','bank','credit')), opening_balance numeric(18,2) not null default 0, annual_rate numeric(7,4) not null default 0 check(annual_rate between 0 and 200), cutoff_day smallint not null default 28 check(cutoff_day between 1 and 31), payment_day smallint not null default 15 check(payment_day between 1 and 31), credit_limit numeric(18,2) not null default 0 check(credit_limit>=0), created_at timestamptz not null default now(), unique(id,user_id));
+create table public.transactions (id uuid primary key default gen_random_uuid(), user_id uuid not null references auth.users(id) on delete cascade, account_id uuid not null, description text not null check(length(description) between 2 and 160), amount numeric(18,2) not null check(amount>0 and amount<=1000000000000), kind text not null check(kind in ('income','expense')), category text not null check(category in ('Necesidades','Deseos','Ahorro')), occurred_on date not null, installments smallint not null default 1 check(installments between 1 and 120), idempotency_key text, created_at timestamptz not null default now(), foreign key(account_id,user_id) references public.accounts(id,user_id), unique(id,user_id), unique(user_id,idempotency_key));
+create index transactions_user_date on public.transactions(user_id,occurred_on desc);
+create index transactions_account_owner on public.transactions(account_id,user_id);
+create table public.amortizations (id uuid primary key default gen_random_uuid(), user_id uuid not null references auth.users(id) on delete cascade, transaction_id uuid not null, installment smallint not null check(installment>0), due_date date not null, principal numeric(18,2) not null check(principal>=0), interest numeric(18,2) not null check(interest>=0), payment numeric(18,2) not null check(payment=principal+interest), balance numeric(18,2) not null check(balance>=0), paid_at timestamptz, foreign key(transaction_id,user_id) references public.transactions(id,user_id) on delete cascade, unique(transaction_id,installment));
+create index amortizations_user_due on public.amortizations(user_id,due_date);
+create index amortizations_transaction_owner on public.amortizations(transaction_id,user_id);
+create table public.api_keys (id uuid primary key default gen_random_uuid(), user_id uuid not null references auth.users(id) on delete cascade, name text not null check(length(name) between 1 and 60), prefix text not null, key_hash text not null unique check(length(key_hash)=64), created_at timestamptz not null default now(), expires_at timestamptz, revoked_at timestamptz);
+create index api_keys_user on public.api_keys(user_id);
+create table private.api_usage (key_id uuid primary key references public.api_keys(id) on delete cascade, minute timestamptz not null, calls integer not null);
+alter table private.api_usage enable row level security;
+create table public.loans (id uuid primary key default gen_random_uuid(), user_id uuid not null references auth.users(id) on delete cascade, counterparty text not null, kind text not null check(kind in ('receivable','payable')), principal numeric(18,2) not null check(principal>0), annual_rate numeric(7,4) not null default 0 check(annual_rate between 0 and 200), due_date date, created_at timestamptz not null default now(), unique(id,user_id));
+create index loans_user on public.loans(user_id);
+create table public.loan_payments (id uuid primary key default gen_random_uuid(), user_id uuid not null references auth.users(id) on delete cascade, loan_id uuid not null, amount numeric(18,2) not null check(amount>0), paid_on date not null default current_date, foreign key(loan_id,user_id) references public.loans(id,user_id));
+create index loan_payments_owner on public.loan_payments(loan_id,user_id);
+create index loan_payments_user on public.loan_payments(user_id);
+create table public.notifications (id uuid primary key default gen_random_uuid(), user_id uuid not null references auth.users(id) on delete cascade, account_id uuid references public.accounts(id) on delete cascade, kind text not null, due_date date not null, message text not null, read_at timestamptz, created_at timestamptz not null default now(), unique(user_id,account_id,kind,due_date));
+create index notifications_user on public.notifications(user_id);
+create index notifications_account on public.notifications(account_id);
+do $$ declare t text; begin foreach t in array array['profiles','devices','accounts','transactions','amortizations','api_keys','loans','loan_payments','notifications'] loop execute format('alter table public.%I enable row level security',t); end loop; end $$;
+create policy devices_read on public.devices for select to authenticated using(user_id=(select auth.uid()));
+create policy devices_insert on public.devices for insert to authenticated with check(user_id=(select auth.uid()) and session_id=nullif(auth.jwt()->>'session_id','')::uuid and revoked_at is null);
+create policy devices_revoke on public.devices for update to authenticated using(user_id=(select auth.uid())) with check(user_id=(select auth.uid()) and revoked_at is not null);
+grant select,insert on public.devices to authenticated;
+grant update(revoked_at) on public.devices to authenticated;
+create policy profiles_owner on public.profiles for all to authenticated using(id=(select auth.uid()) and (select private.session_active())) with check(id=(select auth.uid()) and (select private.session_active()));
+grant select,insert,update on public.profiles to authenticated;
+do $$ declare t text; begin foreach t in array array['accounts','transactions','amortizations','api_keys','loans','loan_payments','notifications'] loop execute format('create policy owner_read on public.%I for select to authenticated using(user_id=(select auth.uid()) and (select private.session_active()))',t); end loop; foreach t in array array['accounts','loans','loan_payments'] loop execute format('create policy owner_insert on public.%I for insert to authenticated with check(user_id=(select auth.uid()) and (select private.session_active()))',t); execute format('create policy owner_update on public.%I for update to authenticated using(user_id=(select auth.uid()) and (select private.session_active())) with check(user_id=(select auth.uid()) and (select private.session_active()))',t); execute format('grant select,insert,update on public.%I to authenticated',t); end loop; end $$;
+grant select on public.transactions,public.amortizations,public.notifications to authenticated;
+grant select,insert on public.api_keys to authenticated;
+grant update(revoked_at) on public.api_keys to authenticated;
+create policy keys_insert on public.api_keys for insert to authenticated with check(user_id=(select auth.uid()) and (select private.session_active()));
+create policy keys_revoke on public.api_keys for update to authenticated using(user_id=(select auth.uid()) and (select private.session_active())) with check(user_id=(select auth.uid()) and (select private.session_active()) and revoked_at is not null);
+-- Financial writes go through this atomic function; RPC has explicit identity and account ownership checks.
+create function private.record_transaction(p_user_id uuid,p_data jsonb,p_idempotency text default null) returns public.transactions language plpgsql security definer set search_path='' as $$
+declare a public.accounts; t public.transactions; n integer; r numeric; principal numeric; remaining numeric; quota numeric; capital numeric; int_value numeric; first_due date; due date; i integer; purchase_date date;
+begin
+ if coalesce(auth.jwt()->>'role','')<>'service_role' and (p_user_id is distinct from auth.uid() or not private.session_active()) then raise insufficient_privilege; end if;
+ if p_idempotency is not null then perform pg_advisory_xact_lock(hashtextextended(p_user_id::text||p_idempotency,0)); select * into t from public.transactions where user_id=p_user_id and idempotency_key=p_idempotency; if found then return t; end if; end if;
+ select * into a from public.accounts where id=(p_data->>'account_id')::uuid and user_id=p_user_id for update;
+ if not found then raise exception using errcode='22023',message='La cuenta no pertenece al usuario.'; end if;
+ n=coalesce((p_data->>'installments')::integer,1); principal=(p_data->>'amount')::numeric; purchase_date=(p_data->>'occurred_on')::date;
+ if n<1 or n>120 or principal<=0 or principal>1000000000000 or principal<>round(principal,2) then raise exception using errcode='22023',message='Monto o cuotas inválidos.'; end if;
+ if n>1 and (a.kind<>'credit' or p_data->>'kind'<>'expense') then raise exception using errcode='22023',message='Las cuotas requieren un gasto con tarjeta de crédito.'; end if;
+ insert into public.transactions(user_id,account_id,description,amount,kind,category,occurred_on,installments,idempotency_key) values(p_user_id,a.id,p_data->>'description',principal,p_data->>'kind',p_data->>'category',purchase_date,n,p_idempotency) returning * into t;
+ if a.kind='credit' and t.kind='expense' then
+  r=power(1+a.annual_rate/100,1.0/12)-1; remaining=principal; quota=round(case when r=0 then principal/n else principal*r/(1-power(1+r,-n)) end,2);
+  -- First payment is in the month after the applicable statement cutoff.
+  first_due=(date_trunc('month',purchase_date)+interval '1 month')::date;
+  if extract(day from purchase_date)>a.cutoff_day then first_due=(first_due+interval '1 month')::date; end if;
+  for i in 1..n loop
+   due=(first_due+make_interval(months=>i-1))::date;
+   due=due+(least(a.payment_day,extract(day from (due+interval '1 month - 1 day'))::integer)-1);
+   int_value=round(remaining*r,2); capital=case when i=n then remaining else least(remaining,quota-int_value) end; remaining=remaining-capital;
+   insert into public.amortizations(user_id,transaction_id,installment,due_date,principal,interest,payment,balance) values(p_user_id,t.id,i,due,capital,int_value,capital+int_value,remaining);
+  end loop;
+ end if;
+ return t;
+end $$;
+create function public.record_transaction(p_user_id uuid,p_data jsonb,p_idempotency text default null) returns public.transactions language sql security invoker set search_path='' as $$ select private.record_transaction(p_user_id,p_data,p_idempotency) $$;
+revoke all on function private.record_transaction(uuid,jsonb,text) from public,anon;
+grant execute on function private.record_transaction(uuid,jsonb,text) to authenticated,service_role;revoke all on function public.record_transaction(uuid,jsonb,text) from public,anon;
+grant execute on function public.record_transaction(uuid,jsonb,text) to authenticated,service_role;
+create function public.consume_api_quota(p_key_id uuid) returns boolean language plpgsql security invoker set search_path='' as $$ declare n integer; begin insert into private.api_usage(key_id,minute,calls) values(p_key_id,date_trunc('minute',now()),1) on conflict(key_id) do update set calls=case when api_usage.minute=date_trunc('minute',now()) then api_usage.calls+1 else 1 end,minute=date_trunc('minute',now()) returning calls into n;return n<=60;end $$;
+revoke all on function public.consume_api_quota(uuid) from public,anon,authenticated;
+grant usage on schema private to service_role;
+grant all on private.api_usage to service_role;
+grant execute on function public.consume_api_quota(uuid) to service_role;
+create function public.financial_summary(p_user_id uuid) returns jsonb language plpgsql security invoker set search_path='' as $$ declare result jsonb;begin if coalesce(auth.jwt()->>'role','')<>'service_role' and (p_user_id is distinct from auth.uid() or not private.session_active()) then raise insufficient_privilege;end if; select jsonb_build_object('income',coalesce(sum(amount) filter(where kind='income'),0),'expenses',coalesce(sum(amount) filter(where kind='expense'),0),'upcoming_installments',(select coalesce(sum(payment),0) from public.amortizations where user_id=p_user_id and paid_at is null and due_date between current_date and (date_trunc('month',current_date)+interval '1 month - 1 day')::date)) into result from public.transactions where user_id=p_user_id; return result;end $$;
+revoke all on function public.financial_summary(uuid) from public,anon;
+grant execute on function public.financial_summary(uuid) to authenticated,service_role;
+revoke all on function private.session_active() from public,anon;
+grant execute on function private.session_active() to authenticated;
+grant all on all tables in schema public to service_role;
