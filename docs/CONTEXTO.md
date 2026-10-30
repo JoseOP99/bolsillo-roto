@@ -4,7 +4,15 @@ Aplicación personal para registrar rápidamente ingresos/gastos, conocer caja y
 
 ## Estado implementado
 
-Next.js App Router, React, RHF/Zod, CSS responsive, lucide-react. Pantallas: resumen, movimientos, cuentas, tarjetas/simulador, presupuesto, préstamos, proyección, integraciones, dispositivos y avisos. `/demo` contiene datos ficticios locales, aislados de la base; `/` usa Supabase y empieza vacío hasta iniciar sesión y crear cuentas.
+Next.js App Router, React, RHF/Zod, CSS responsive y tipografía Geist + Plus Jakarta Sans, lucide-react. Pantallas: resumen, movimientos, cuentas, tarjetas/simulador, presupuesto, préstamos, proyección, integraciones, dispositivos y avisos. `/demo` contiene datos ficticios locales, aislados de la base; `/` usa Supabase y empieza vacío hasta iniciar sesión y crear cuentas.
+
+### Sistema Visual y Experiencia de Usuario (UI/UX)
+
+- **Estética**: Dark Mode Modern Fintech con micro-interacciones fluidas y acabados glassmorphic sutiles.
+- **Tipografía de alta ingeniería**: Adopción de `Geist` para cuerpo/métricas y `Plus Jakarta Sans` para titulares y marcas visuales; activación universal de cifras tabulares (`font-feature-settings: "tnum" 1`).
+- **Paleta de contraste calibrada**: Fondo base `#090e17`, paneles `#111827`, realce positivo en `#5ee8ad` (Electric Mint) y alertas de fuga en `#ef9282` (Coral).
+- **Animaciones y respuesta táctil**: Transiciones cubic-bezier con feedback táctil `:active` en botones, apertura fluida de modales con desenfoque de fondo y animación contextual para notificaciones tipo Toast.
+- **Detalles completos**: Ver `docs/DISENO.md` y `DESIGN.md`.
 
 Única base autorizada: Supabase **bolsillo-roto**, `kgergeimnxcyptffvmnp`, `us-east-1`. Se verificó vacía antes de aplicar las migraciones. Tablas: profiles, devices, accounts, transactions, amortizations, api_keys, loans, loan_payments, notifications y recurring_entries. `auth.users` es la identidad canónica; no se duplican contraseñas. `private.api_usage` cuenta consumo por llave.
 
