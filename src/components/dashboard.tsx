@@ -25,13 +25,17 @@ import {
   Trash2,
   Copy,
   ArrowRight,
-  Sparkles,
 } from "lucide-react";
 import { amortize, money, monthlyRate } from "@/lib/finance";
 import { supabase as liveSupabase } from "@/lib/supabase";
 import Loans from "./loans";
 import Projection from "./projection";
 import AdminUsers from "./admin-users";
+import Welcome from "./welcome";
+import AuthPanel from "./auth-panel";
+import { ProductBrand, ZenubitSignature } from "./brand";
+import { ThemeToggle } from "./theme";
+import { useScrollHeader } from "./use-scroll-header";
 import { transactionSchema, type TransactionInput } from "@/lib/schemas";
 type Account = {
   id: string;
@@ -139,38 +143,6 @@ const navigation = [
   { label: "Integraciones", icon: KeyRound },
   { label: "Dispositivos", icon: Smartphone },
 ];
-function Line({ coral = false }: { coral?: boolean }) {
-  return (
-    <svg viewBox="0 0 400 95" preserveAspectRatio="none" aria-hidden="true">
-      <defs>
-        <linearGradient
-          id={coral ? "coral" : "mint"}
-          x1="0"
-          y1="0"
-          x2="0"
-          y2="1"
-        >
-          <stop stopColor={coral ? "#fa9e8f" : "#65efb0"} stopOpacity=".2" />
-          <stop
-            offset="1"
-            stopColor={coral ? "#fa9e8f" : "#65efb0"}
-            stopOpacity="0"
-          />
-        </linearGradient>
-      </defs>
-      <path
-        d="M0 76 C35 79 45 48 80 55 S130 85 165 52 S210 58 240 34 S290 51 320 24 S360 30 400 5 L400 95 L0 95Z"
-        fill={`url(#${coral ? "coral" : "mint"})`}
-      />
-      <path
-        d="M0 76 C35 79 45 48 80 55 S130 85 165 52 S210 58 240 34 S290 51 320 24 S360 30 400 5"
-        fill="none"
-        stroke={coral ? "#fa9e8f" : "#65efb0"}
-        strokeWidth="3"
-      />
-    </svg>
-  );
-}
 export default function Dashboard({ demo = false }: { demo?: boolean }) {
   const supabase = demo ? null : liveSupabase;
   const pendingSave = useRef<{ body: string; key: string } | null>(null);
@@ -199,6 +171,9 @@ export default function Dashboard({ demo = false }: { demo?: boolean }) {
     [sessions, setSessions] = useState<
       { session_id: string; label: string; last_seen: string }[]
     >([]);
+  const scrollHeader = useScrollHeader(mobile || modal || authOpen);
+  const mobileTrigger = useRef<HTMLButtonElement>(null),
+    mobileNav = useRef<HTMLElement>(null);
   const form = useForm<
     z.input<typeof transactionSchema>,
     unknown,
@@ -274,7 +249,9 @@ export default function Dashboard({ demo = false }: { demo?: boolean }) {
   }
   useEffect(() => {
     if (supabase) {
-      void load();
+      void load().catch(() =>
+        notify("No pudimos actualizar tus datos. Revisa tu conexión."),
+      );
       const {
         data: { subscription },
       } = supabase.auth.onAuthStateChange(() => {
@@ -300,8 +277,44 @@ export default function Dashboard({ demo = false }: { demo?: boolean }) {
       localStorage.setItem("br-demo-v1", JSON.stringify({ txs, accounts }));
   }, [txs, accounts, ready]);
   useEffect(() => {
+    if (!mobile) return;
+    const before = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+    const nav = mobileNav.current;
+    nav?.querySelector<HTMLElement>(".sidebar-close")?.focus();
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === "Escape") {
+        setMobile(false);
+        mobileTrigger.current?.focus();
+      }
+      if (e.key === "Tab") {
+        const items = Array.from(
+          nav?.querySelectorAll<HTMLElement>(
+            "a[href],button:not(:disabled),summary",
+          ) || [],
+        ).filter((el) => el.getClientRects().length);
+        const first = items[0],
+          last = items.at(-1);
+        if (e.shiftKey && document.activeElement === first) {
+          e.preventDefault();
+          last?.focus();
+        } else if (!e.shiftKey && document.activeElement === last) {
+          e.preventDefault();
+          first?.focus();
+        }
+      }
+    };
+    document.addEventListener("keydown", onKey);
+    return () => {
+      document.body.style.overflow = before;
+      document.removeEventListener("keydown", onKey);
+    };
+  }, [mobile]);
+  useEffect(() => {
     if (!modal && !authOpen) return;
     const previous = document.activeElement as HTMLElement | null;
+    const previousOverflow = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
     const dialog = document.querySelector<HTMLElement>('[role="dialog"]');
     dialog?.querySelector<HTMLInputElement>("input")?.focus();
     const trap = (event: KeyboardEvent) => {
@@ -324,6 +337,7 @@ export default function Dashboard({ demo = false }: { demo?: boolean }) {
     document.addEventListener("keydown", trap);
     return () => {
       document.removeEventListener("keydown", trap);
+      document.body.style.overflow = previousOverflow;
       previous?.focus();
     };
   }, [modal, authOpen]);
@@ -636,7 +650,6 @@ export default function Dashboard({ demo = false }: { demo?: boolean }) {
     <section className="panel budget">
       <div className="section-head">
         <div>
-          <span className="eyebrow">UN LUGAR PARA CADA PESO</span>
           <h2>Tu regla 50 / 30 / 20</h2>
         </div>
         <span className="pill">Este período</span>
@@ -681,7 +694,6 @@ export default function Dashboard({ demo = false }: { demo?: boolean }) {
     <section className="panel simulator">
       <div className="section-head">
         <div>
-          <span className="eyebrow">COMPRA CON LOS OJOS ABIERTOS</span>
           <h2>¿Y si lo pago a cuotas?</h2>
         </div>
         <CreditCard className="positive" size={23} />
@@ -772,63 +784,69 @@ export default function Dashboard({ demo = false }: { demo?: boolean }) {
       )}
     </section>
   );
+  if (!demo && !user) return <Welcome />;
   return (
     <div className="app-shell">
-      <aside className={"sidebar " + (mobile ? "open" : "")}>
-        <a href="/" className="brand">
-          <img
-            src="/logo.png"
-            alt=""
-            onError={(e) => {
-              e.currentTarget.src = "/icon.svg";
-            }}
-          />
-          <span>
-            Bolsillo
-            <span>
-              Roto<span className="brand-dot">.</span>
-            </span>
-          </span>
-        </a>
-        <div className="workspace">
-          <span className="workspace-icon">
-            <Wallet size={18} />
-          </span>
-          <div>
-            Mi espacio personal<small>Un bolsillo, más posibilidades</small>
-          </div>
-        </div>
-        <span className="nav-label">TU DÍA A DÍA</span>
-        <nav>
-          {navigation.map(({ label, icon: Icon }, i) => (
-            <div key={label}>
-              {label === "Integraciones" && (
-                <span className="nav-label integrations-label">
-                  CONECTA TU BOLSILLO
-                </span>
-              )}
+      <a className="skip-link" href="#app-content">
+        Saltar al contenido
+      </a>
+      <aside
+        ref={mobileNav}
+        id="app-navigation"
+        aria-label="Navegación de tu bolsillo"
+        className={"sidebar " + (mobile ? "open" : "")}
+      >
+        <ProductBrand />
+        <button
+          type="button"
+          className="icon-button sidebar-close"
+          aria-label="Cerrar navegación"
+          onClick={() => {
+            setMobile(false);
+            mobileTrigger.current?.focus();
+          }}
+        >
+          <X />
+        </button>
+        <nav aria-label="Navegación principal">
+          {navigation.slice(0, 5).map(({ label, icon: Icon }) => (
+            <button
+              key={label}
+              className={page === label ? "active" : ""}
+              aria-current={page === label ? "page" : undefined}
+              onClick={() => go(label)}
+            >
+              <Icon size={21} />
+              {label}
+            </button>
+          ))}
+          <details className="nav-more">
+            <summary>
+              Más herramientas <ChevronRight size={17} />
+            </summary>
+            {navigation.slice(5).map(({ label, icon: Icon }) => (
               <button
+                key={label}
                 className={page === label ? "active" : ""}
                 aria-current={page === label ? "page" : undefined}
                 onClick={() => go(label)}
               >
-                <Icon size={19} />
+                <Icon size={20} />
                 {label}
-                {page === label && <span className="nav-dot" />}
               </button>
-            </div>
-          ))}
+            ))}
+          </details>
+          {role === "superadmin" && (
+            <button
+              className={page === "Administración" ? "active" : ""}
+              onClick={() => go("Administración")}
+            >
+              <KeyRound size={20} />
+              Administración
+            </button>
+          )}
         </nav>
         <div className="sidebar-bottom">
-          <div className="sidebar-tip">
-            <Sparkles size={18} />
-            <b>
-              Pequeños pasos.
-              <br />
-              Grandes bolsillos.
-            </b>
-            <p>Conocer tu dinero es el primer paso para cuidarlo.</p>
-          </div>
           <button
             className="profile"
             onClick={() =>
@@ -859,12 +877,18 @@ export default function Dashboard({ demo = false }: { demo?: boolean }) {
         </div>
       </aside>
       {mobile && <div className="scrim" onClick={() => setMobile(false)} />}
-      <div className="main-wrap">
-        <header className="topbar">
+      <div className="main-wrap" inert={mobile}>
+        <header
+          ref={scrollHeader.ref}
+          className={"topbar " + (scrollHeader.hidden ? "is-hidden" : "")}
+        >
           <div className="breadcrumb">
             <button
               className="icon-button mobile-menu"
               aria-label="Abrir menú"
+              aria-expanded={mobile}
+              aria-controls="app-navigation"
+              ref={mobileTrigger}
               onClick={() => setMobile(!mobile)}
             >
               <Menu />
@@ -874,10 +898,11 @@ export default function Dashboard({ demo = false }: { demo?: boolean }) {
             <b>{page}</b>
           </div>
           <div className="topbar-right">
+            <ThemeToggle />
             <span className="connection">
               <i />
               {user
-                ? "Conectado a Supabase"
+                ? "Tu espacio personal"
                 : supabase
                   ? "Inicia sesión para comenzar"
                   : "Demostración local"}
@@ -893,16 +918,13 @@ export default function Dashboard({ demo = false }: { demo?: boolean }) {
             <span className="avatar small">BR</span>
           </div>
         </header>
-        <main>
+        <main id="app-content">
           <div className="page-heading">
             <div>
-              <div className="eyebrow">TU DINERO, BAJO CONTROL</div>
-              <h1>
-                {page === "Resumen" ? "Dale un respiro a tu bolsillo." : page}
-              </h1>
+              <h1>{page === "Resumen" ? "Tu resumen financiero" : page}</h1>
               <p>
                 {page === "Resumen"
-                  ? "Menos cuentas en la cabeza. Más claridad para lo que viene."
+                  ? "Una mirada clara a lo que tienes, gastas y puedes planear."
                   : "Un paso más hacia tu tranquilidad financiera."}
               </p>
             </div>
@@ -948,7 +970,6 @@ export default function Dashboard({ demo = false }: { demo?: boolean }) {
                     <span className="positive">Tu dinero disponible</span>
                     <span>en cuentas y efectivo</span>
                   </div>
-                  <Line />
                 </section>
                 <section className="stat">
                   <div className="stat-label">
@@ -964,13 +985,6 @@ export default function Dashboard({ demo = false }: { demo?: boolean }) {
                       {txs.filter((t) => t.kind === "income").length}{" "}
                       movimientos
                     </span>
-                  </div>
-                  <div className="mini-bars">
-                    {[24, 42, 32, 56, 41, 67, 50, 80, 68, 90, 72, 100].map(
-                      (v, i) => (
-                        <i key={i} style={{ height: v + "%" }} />
-                      ),
-                    )}
                   </div>
                 </section>
                 <section className="stat">
@@ -988,7 +1002,6 @@ export default function Dashboard({ demo = false }: { demo?: boolean }) {
                       movimientos
                     </span>
                   </div>
-                  <Line coral />
                 </section>
               </div>
               <div className="dashboard-grid">
@@ -1016,7 +1029,7 @@ export default function Dashboard({ demo = false }: { demo?: boolean }) {
                       </div>
                       <div className="flow-legend">
                         <span>
-                          <i /> Ingresos
+                          <i /> Objetivo 50/30/20
                         </span>
                         <span>
                           <i /> Gastos
@@ -1026,7 +1039,7 @@ export default function Dashboard({ demo = false }: { demo?: boolean }) {
                     <div
                       className="bar-chart"
                       role="img"
-                      aria-label={`Ingresos ${money(income)}, gastos ${money(expenses)}. Gráfica por categoría.`}
+                      aria-label={`Distribución objetivo 50/30/20 sobre ingresos de ${money(income)}, comparada con gastos de ${money(expenses)} por categoría.`}
                     >
                       {["Necesidades", "Deseos", "Ahorro"].map((c, i) => {
                         const v = txs
@@ -1073,7 +1086,6 @@ export default function Dashboard({ demo = false }: { demo?: boolean }) {
                 <div className="right-column">
                   <section className="brand-card">
                     <div>
-                      <span className="eyebrow">UN HÁBITO A LA VEZ</span>
                       <h2>
                         Que tu dinero
                         <br />
@@ -1089,7 +1101,7 @@ export default function Dashboard({ demo = false }: { demo?: boolean }) {
                       </button>
                     </div>
                     <img
-                      src="/logo.png"
+                      src="/logo.webp"
                       alt="Bolsillo con monedas y una gráfica de crecimiento"
                       onError={(e) => {
                         e.currentTarget.src = "/icon.svg";
@@ -1238,7 +1250,6 @@ export default function Dashboard({ demo = false }: { demo?: boolean }) {
           )}
           {page === "Integraciones" && (
             <section className="panel integrations">
-              <span className="eyebrow">TU BOLSILLO, CONECTADO</span>
               <h2>Una API para tus propias ideas</h2>
               <p>
                 Conecta AppSheet, Make o tus scripts mediante una llave privada.
@@ -1376,9 +1387,7 @@ export default function Dashboard({ demo = false }: { demo?: boolean }) {
             <span>
               Bolsillo Roto © {new Date().getFullYear()} · Un peso a la vez.
             </span>
-            <a href="https://zenubit.com" target="_blank" rel="noreferrer">
-              Creado por <b>Zenubit</b> <ArrowUpRight size={13} />
-            </a>
+            <ZenubitSignature/>
           </footer>
         </main>
       </div>
@@ -1399,7 +1408,6 @@ export default function Dashboard({ demo = false }: { demo?: boolean }) {
           >
             <div className="section-head">
               <div>
-                <span className="eyebrow">UNOS SEGUNDOS, MÁS CLARIDAD</span>
                 <h2 id="modal-title">Nuevo movimiento</h2>
               </div>
               <button
@@ -1511,82 +1519,16 @@ export default function Dashboard({ demo = false }: { demo?: boolean }) {
             className="modal"
             role="dialog"
             aria-modal="true"
-            aria-labelledby="auth-title"
+            aria-label="Acceso a tu cuenta"
           >
-            <div className="section-head">
-              <h2 id="auth-title">Bienvenido a tu bolsillo</h2>
-              <button
-                className="icon-button"
-                aria-label="Cerrar"
-                onClick={() => setAuthOpen(false)}
-              >
-                <X />
-              </button>
-            </div>
-            <form
-              onSubmit={async (e) => {
-                e.preventDefault();
-                const fd = new FormData(e.currentTarget);
-                const method =
-                  (e.nativeEvent as SubmitEvent).submitter?.getAttribute(
-                    "value",
-                  ) === "signup"
-                    ? "signUp"
-                    : "signInWithPassword";
-                const credentials = {
-                  email: String(fd.get("email")),
-                  password: String(fd.get("password")),
-                };
-                const { error } =
-                  method === "signUp"
-                    ? await supabase!.auth.signUp({
-                        ...credentials,
-                        options: {
-                          emailRedirectTo: window.location.origin + "/",
-                        },
-                      })
-                    : await supabase!.auth.signInWithPassword(credentials);
-                if (error) notify(error.message);
-                else {
-                  notify(
-                    method === "signUp"
-                      ? "Revisa tu correo para confirmar tu cuenta."
-                      : "Sesión iniciada.",
-                  );
-                  setAuthOpen(false);
-                }
-              }}
+            <button
+              className="icon-button modal-close"
+              aria-label="Cerrar"
+              onClick={() => setAuthOpen(false)}
             >
-              <label>
-                Correo
-                <input
-                  name="email"
-                  type="email"
-                  autoComplete="email"
-                  required
-                />
-              </label>
-              <label>
-                Contraseña
-                <input
-                  name="password"
-                  type="password"
-                  autoComplete="current-password"
-                  minLength={8}
-                  required
-                />
-              </label>
-              <button
-                name="action"
-                value="login"
-                className="button primary full"
-              >
-                Iniciar sesión
-              </button>
-              <button name="action" value="signup" className="button full">
-                Crear cuenta
-              </button>
-            </form>
+              <X />
+            </button>
+            <AuthPanel onComplete={() => setAuthOpen(false)} />
           </section>
         </div>
       )}
