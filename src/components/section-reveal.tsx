@@ -24,15 +24,15 @@ export default function SectionReveal({
           if (entry.isIntersecting) {
             node.animate(
               [
-                { transform: "translateY(16px)", opacity: 0.75 },
+                { transform: "translateY(28px)", opacity: 0.35 },
                 { transform: "translateY(0)", opacity: 1 },
               ],
-              { duration: 550, easing: "cubic-bezier(.22,1,.36,1)" },
+              { duration: 1100, easing: "cubic-bezier(.22,1,.36,1)" },
             );
             observer.unobserve(node);
           }
       },
-      { threshold: 0.08 },
+      { threshold: 0.12 },
     );
     observer.observe(node);
     return () => observer.disconnect();

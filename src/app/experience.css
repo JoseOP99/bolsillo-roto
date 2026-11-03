@@ -2075,3 +2075,24 @@ td {
     }
   }
 }
+
+/* Gentle ambient motion, independent of the entrance transform. */
+@media (prefers-reduced-motion: no-preference) {
+  .hero-product .hero-preview,
+  .account-showcase {
+    animation: pocket-drift 8s ease-in-out infinite;
+  }
+  .account-showcase {
+    animation-delay: -4s;
+  }
+  .hero-product .hero-preview:hover,
+  .hero-product .hero-preview:focus-within,
+  .account-showcase:hover,
+  .account-showcase:focus-within {
+    animation-play-state: paused;
+  }
+  @keyframes pocket-drift {
+    0%, 100% { translate: 0 0; }
+    50% { translate: 0 -5px; }
+  }
+}
