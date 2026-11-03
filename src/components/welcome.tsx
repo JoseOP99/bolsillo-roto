@@ -2,7 +2,6 @@
 import { useEffect, useRef, useState } from "react";
 import {
   ArrowRight,
-  ArrowDown,
   ArrowUpRight,
   Menu,
   X,
@@ -121,40 +120,53 @@ export default function Welcome() {
       </header>
       <main id="contenido" className="public-main" inert={menuOpen}>
         <section className="landing-hero" aria-labelledby="hero-title">
-          <h1 id="hero-title">
-            Menos enredos.
-            <span className="hero-second-line">
-              Más{" "}
-              <span className="hero-pocket">
-                <img
-                  src="/logo.webp"
-                  alt=""
-                  width="280"
-                  height="280"
-                  fetchPriority="high"
-                />
-              </span>{" "}
-              claridad.
-            </span>
-          </h1>
-          <div className="hero-bottom">
+          <div className="hero-copy">
+            <h1 id="hero-title">
+              Organiza tu dinero <em>en un solo lugar.</em>
+            </h1>
             <p>
-              Ingresos, gastos y cuotas. Todo en un lugar, para que puedas vivir
-              con menos cuentas en la cabeza.
+              Registra lo que ganas y gastas, reúne tus cuentas y calcula tus
+              cuotas antes de comprar.
             </p>
             <div className="hero-actions">
               <a className="button primary" href="#mi-cuenta">
                 Entrar a mi bolsillo <ArrowUpRight size={20} />
               </a>
               <a className="text-link" href="/demo">
-                Explorar con datos de ejemplo <ArrowRight size={17} />
+                Probar la demo <ArrowRight size={18} />
               </a>
             </div>
           </div>
-          <a className="scroll-cue" href="#tu-bolsillo">
-            <ArrowDown size={17} />
-            Un lugar para cada peso
-          </a>
+          <div className="hero-product">
+            <div className="hero-preview" data-ui>
+              <div className="preview-top">
+                <Wallet size={21} />
+                <strong>Mi bolsillo</strong>
+                <span>Vista de ejemplo</span>
+              </div>
+              <div className="preview-balance">
+                <span>Ingresos registrados</span>
+                <strong>{money(5200000)}</strong>
+              </div>
+              <div className="preview-row">
+                <Banknote size={20} />
+                <span>
+                  Mercado de la semana<small>Necesidades</small>
+                </span>
+                <b>−{money(186400)}</b>
+              </div>
+              <div className="preview-row">
+                <CreditCard size={20} />
+                <span>
+                  Spotify Premium<small>Deseos</small>
+                </span>
+                <b>−{money(16900)}</b>
+              </div>
+              <a href="/demo" className="preview-link">
+                Explorar movimientos <ArrowUpRight size={17} />
+              </a>
+            </div>
+          </div>
         </section>
         <SectionReveal
           className="product-overview section-wrap"
