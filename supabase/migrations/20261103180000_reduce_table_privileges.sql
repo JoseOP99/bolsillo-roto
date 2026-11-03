@@ -1,0 +1,2 @@
+revoke all on table public.devices, public.profiles, public.accounts, public.transactions, public.amortizations, public.notifications, public.api_keys, public.recurring_entries, public.loan_payments, public.loans from anon;
+revoke truncate, references, trigger on table public.devices, public.profiles, public.accounts, public.transactions, public.amortizations, public.notifications, public.api_keys, public.recurring_entries, public.loan_payments, public.loans from authenticated;

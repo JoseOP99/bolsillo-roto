@@ -28,6 +28,7 @@ export async function identity(request: Request, sessionOnly = false) {
     .get("authorization")
     ?.match(/^Bearer (\S+)$/i)?.[1];
   if (!token) throw new ApiError(401, "Se requiere Bearer Token.");
+  if (token.length > 8192) throw new ApiError(401, "Token inválido.");
   if (token.startsWith("br_")) {
     if (sessionOnly)
       throw new ApiError(403, "Esta acción requiere una sesión de usuario.");
@@ -124,13 +125,13 @@ export function json(value: unknown, status = 200) {
 export function failure(error: unknown) {
   if (error instanceof ApiError)
     return json({ error: error.message }, error.status);
-  console.error(
-    "API error",
-    error instanceof Error ? error.message : "unknown",
-  );
+  console.error("API operation failed");
   return json({ error: "No se pudo completar la operación." }, 500);
 }
 export async function readBody(request: Request) {
+  const contentType = request.headers.get("content-type")?.split(";")[0].trim().toLowerCase();
+  if (contentType !== "application/json")
+    throw new ApiError(415, "Usa Content-Type: application/json.");
   const limit = 16384;
   if (Number(request.headers.get("content-length")) > limit)
     throw new ApiError(413, "Solicitud demasiado grande.");

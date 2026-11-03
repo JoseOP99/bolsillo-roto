@@ -4,7 +4,9 @@ export async function GET(request: Request) {
   try {
     const { db, userId } = await identity(request);
     const url = new URL(request.url);
-    const page = Math.max(0, Number(url.searchParams.get("page")) || 0);
+    const page = Number(url.searchParams.get("page") ?? 0);
+    if (!Number.isSafeInteger(page) || page < 0 || page > 10000)
+      throw new ApiError(422, "Página inválida.");
     const { data, error } = await db
       .from("transactions")
       .select("*")
@@ -42,7 +44,7 @@ export async function POST(request: Request) {
         error.code === "23514" ||
         error.code === "23503"
       )
-        throw new ApiError(422, error.message);
+        throw new ApiError(422, "Revisa los datos y la cuenta del movimiento.");
       throw error;
     }
     return json({ data }, 201);
