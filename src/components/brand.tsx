@@ -2,7 +2,7 @@ import { ArrowUpRight } from "lucide-react";
 export function ProductBrand() {
   return (
     <a className="product-brand" href="/" aria-label="Bolsillo Roto, inicio">
-      <img src="/logo.webp" width="60" height="64" alt="" />
+      <img src="/logo.png" width="60" height="64" alt="" />
       <span>
         Bolsillo Roto<span>Tu dinero, en orden.</span>
       </span>

@@ -11,7 +11,6 @@ import {
   Plus,
   Check,
 } from "lucide-react";
-import AuthPanel from "./auth-panel";
 import { ProductBrand, ZenubitSignature } from "./brand";
 import { ThemeToggle } from "./theme";
 import { useScrollHeader } from "./use-scroll-header";
@@ -93,7 +92,7 @@ export default function Welcome() {
             ))}
             <a
               className="mobile-login"
-              href="#mi-cuenta"
+              href="/acceso"
               onClick={() => setMenuOpen(false)}
             >
               Iniciar sesión <ArrowRight size={18} />
@@ -101,7 +100,7 @@ export default function Welcome() {
           </nav>
           <div className="site-header-actions">
             <ThemeToggle />
-            <a className="button primary header-login" href="#mi-cuenta">
+            <a className="button header-login" href="/acceso">
               Iniciar sesión <ArrowUpRight size={17} />
             </a>
             <button
@@ -129,8 +128,8 @@ export default function Welcome() {
               cuotas antes de comprar.
             </p>
             <div className="hero-actions">
-              <a className="button primary" href="#mi-cuenta">
-                Entrar a mi bolsillo <ArrowUpRight size={20} />
+              <a className="button primary" href="/acceso">
+                Iniciar sesión <ArrowRight size={20} />
               </a>
               <a className="text-link" href="/demo">
                 Probar la demo <ArrowRight size={18} />
@@ -138,6 +137,9 @@ export default function Welcome() {
             </div>
           </div>
           <div className="hero-product">
+            <svg className="hero-trend" viewBox="0 0 240 72" aria-hidden="true">
+              <path pathLength="1" d="M2 64 C35 64 38 42 70 46 S111 63 142 29 S189 49 238 4" />
+            </svg>
             <div className="hero-preview" data-ui>
               <div className="preview-top">
                 <Wallet size={21} />
@@ -214,7 +216,7 @@ export default function Welcome() {
                 <Check size={18} />
               </div>
             ))}
-            <a className="showcase-link" href="#mi-cuenta">
+            <a className="showcase-link" href="/acceso">
               <Plus size={18} /> Empieza con tu primera cuenta{" "}
               <ArrowUpRight size={18} />
             </a>
@@ -369,23 +371,7 @@ export default function Welcome() {
             ))}
           </div>
         </SectionReveal>
-        <SectionReveal className="access-section section-wrap" id="mi-cuenta">
-          <div className="access-copy">
-            <h2>
-              Tu bolsillo,
-              <br />
-              <span>a tu manera.</span>
-            </h2>
-            <p>
-              Empieza con una cuenta y un movimiento. Lo demás, un paso a la
-              vez.
-            </p>
-            <a className="text-link" href="/demo">
-              Primero quiero explorar <ArrowRight size={17} />
-            </a>
-          </div>
-          <AuthPanel />
-        </SectionReveal>
+        <div className="landing-close section-wrap"><a className="button primary" href="/acceso">Abrir mi cuenta <ArrowRight size={18} /></a></div>
       </main>
       <footer className="public-footer">
         <ProductBrand />

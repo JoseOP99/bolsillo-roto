@@ -9,7 +9,7 @@ export const metadata: Metadata = {
   description: "Tus cuentas, gastos y cuotas en un solo lugar.",
   manifest: "/manifest.webmanifest",
   icons: {
-    icon: { url: "/bolsillo-tab.svg", sizes: "any", type: "image/svg+xml" },
+    icon: { url: "/logo.png", sizes: "any", type: "image/png" },
     apple: "/apple-touch-icon.png",
   },
   appleWebApp: { capable: true, title: "Bolsillo Roto" },

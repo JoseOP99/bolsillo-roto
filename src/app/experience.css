@@ -1885,3 +1885,132 @@ td {
     }
   }
 }
+
+:root[data-theme="dark"] {
+  --bg: #111821;
+  --panel: #1a2431;
+  --line: #344458;
+  --muted: #bbc7d5;
+  --text: #f3f7fc;
+  --mint: #92e5c3;
+  --soft: #202e3e;
+  --navy: #0c1420;
+  --field: #151f2c;
+  --field-border: #46596e;
+  --subtle: #26374a;
+  --image-ground: #24364b;
+  --nav-ground: rgba(17, 24, 33, 0.96);
+}
+
+:root[data-theme="dark"] .product-brand img {
+  background: #d9ede5;
+  border-radius: 12px;
+  padding: 4px;
+}
+
+.public-site .section-wrap,
+.public-site .public-footer {
+  border-top: 0;
+}
+
+.public-site .site-header .header-login,
+.public-site .hero-actions > .primary,
+.landing-close .button {
+  border-radius: 999px;
+}
+
+.landing-close {
+  text-align: center;
+}
+
+.hero-product {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  background: radial-gradient(ellipse at 95% 10%, var(--accent), transparent 65%), var(--image-ground);
+}
+
+:root[data-theme="dark"] .hero-product {
+  background: radial-gradient(ellipse at 95% 10%, #35576c, transparent 70%), var(--image-ground);
+}
+
+.hero-trend {
+  position: absolute;
+  inset: auto -8% 0 auto;
+  z-index: -1;
+  width: 85%;
+  fill: none;
+  stroke: var(--mint);
+  stroke-width: 1.5;
+  opacity: .55;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .hero-trend path {
+    stroke-dasharray: 1;
+    animation: draw-pocket-trend 1.6s .2s ease-out both;
+  }
+
+  @keyframes draw-pocket-trend {
+    from { stroke-dashoffset: 1; }
+    to { stroke-dashoffset: 0; }
+  }
+
+  .hero-preview {
+    transition: transform .35s cubic-bezier(.22, 1, .36, 1);
+  }
+
+  .hero-preview:focus-within {
+    transform: translateY(-5px);
+  }
+
+  @media (hover: hover) {
+    .hero-preview:hover {
+      transform: translateY(-5px);
+    }
+  }
+}
+
+.access-page {
+  display: grid;
+  grid-template-rows: auto 1fr auto;
+  min-height: 100svh;
+  max-width: 1120px;
+  margin-inline: auto;
+  padding: 16px clamp(16px, 5vw, 48px);
+}
+
+.access-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.access-layout {
+  display: grid;
+  align-content: center;
+  gap: clamp(24px, 6vw, 80px);
+  padding-block: clamp(28px, 8vh, 96px);
+}
+
+.access-layout h1 {
+  margin-block: 16px 8px;
+  font-size: clamp(36px, 6vw, 76px);
+  line-height: 1.02;
+}
+
+.access-layout .auth-panel {
+  width: 100%;
+  min-width: 0;
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: 24px;
+  padding: clamp(16px, 4vw, 32px);
+}
+
+@media (min-width: 768px) {
+  .access-layout {
+    grid-template-columns: 1fr minmax(0, 420px);
+    align-items: center;
+  }
+}
