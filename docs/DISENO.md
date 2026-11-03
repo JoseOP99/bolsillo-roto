@@ -1,13 +1,18 @@
 # Diseño de Bolsillo Roto
 
-Referencia del usuario: `DESIGN.md`, `screen.png` y `code.html`. Se conserva la identidad oscura/mint y se cambia la densidad y el lenguaje hacia un uso personal comprensible. La referencia original se conserva como evidencia, no es el código ejecutado.
+La portada integra el bolsillo ilustrado en un titular de dos líneas. Nova Wallet sirvió como referencia para el protagonismo del producto y la acción principal. Lugano Living Lab aportó los cambios de escala y el ritmo editorial entre secciones. Los textos y funciones son propios de Bolsillo Roto.
 
-Fondo `#0c111b`, superficies `#141b27`, bordes `#242d3b`, texto `#edf2fa`, menta `#68edb4`, coral para salidas y lavanda para categorías. Plus Jakarta Sans para títulos, Inter para cuerpo/datos y cifras tabulares. Fuentes cargadas desde Google Fonts con fallback del sistema; se puede autoalojar más adelante.
+La portada presenta las cuentas, explica el registro, permite simular cuotas y ofrece acceso al formulario. El panel conserva sus herramientas, agrupa opciones secundarias y separa cifras con espacio y contraste. La demo usa datos ficticios locales.
 
-Navegación lateral en escritorio, menú lateral superpuesto en móvil; tarjetas en tres columnas, cuerpo principal 2 columnas y una sola en móvil. Acción principal Nuevo movimiento, atajo Ctrl/⌘ K y formularios con etiquetas visibles. Foco visible y soporte reduced-motion. Las tablas permiten desplazamiento y ocultan la categoría secundaria en pantallas pequeñas.
+El tema claro es el inicial. El selector guarda la preferencia de tema en el navegador y se comparte entre portada y panel. La paleta de finanzas conserva verdes y acentos de gasto. Los títulos usan Plus Jakarta Sans y el cuerpo Inter, con cifras tabulares.
 
-Marca: `public/logo.png`, editada desde la imagen original para quitar el fondo blanco, preservando bolsillo, tarjeta, billetes y monedas. No guardar imágenes de producción en rutas temporales. Fallback `public/icon.svg`. Firma activa: Creado por Zenubit enlaza a https://zenubit.com.
+| Antes | Ahora | Motivo |
+| --- | --- | --- |
+| Acceso poco visible sobre un panel vacío | Portada con botón de entrada y formulario accesible por ancla | Ubicar la acción principal desde el primer pantallazo |
+| Barra lateral cargada de opciones | Tareas principales visibles y herramientas secundarias desplegables | Dar prioridad al registro y las consultas diarias |
+| Cabecera fija | Se retira al bajar y reaparece al subir, con prioridad al foco y al menú abierto | Ampliar el espacio de lectura |
+| Decoración en las cifras | Montos legibles y gráfico con objetivos 50/30/20 identificados | Mostrar qué representa cada dato |
 
-Estados: cero datos reales antes de iniciar sesión, demo explícita independiente, mensajes de guardado/error, validación en formulario, bloqueo durante envío, página offline, vacíos en movimientos y dispositivos. No simular métricas de API ni anunciar proveedores conectados si no lo están.
+Las secciones se entregan visibles en HTML. IntersectionObserver inicia entradas suaves de 550 ms. El bolsillo tiene una entrada de 650 ms y la cabecera usa una transición de 240 ms. La reducción de movimiento desactiva las animaciones y el scroll suave. Menús y formularios conservan foco visible, cierre con Escape y objetivos táctiles amplios.
 
-Las pequeñas curvas de las tarjetas resumen son decoración; la gráfica central usa valores registrados y objetivos por categoría. Proyección se presenta aparte y explica la fórmula. Las revisiones de escritorio/móvil y hallazgos se registran en VERIFICACION.md.
+La marca usa `public/logo.webp` para la imagen visible, favicon y recursos PWA propios. La firma oficial usa `public/zenubit-mark.webp`, optimizado a partir de `logoZenubit.webp` del repositorio Zenubit. La imagen protagonista y el simulador funcional aportan la evidencia visual. Se omiten vídeos y fotografías decorativas para preservar peso y autenticidad.

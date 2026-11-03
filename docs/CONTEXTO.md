@@ -4,7 +4,7 @@ Aplicación personal para registrar rápidamente ingresos/gastos, conocer caja y
 
 ## Estado implementado
 
-Next.js App Router, React, RHF/Zod, CSS responsive, lucide-react. Pantallas: resumen, movimientos, cuentas, tarjetas/simulador, presupuesto, préstamos, proyección, integraciones, dispositivos y avisos. `/demo` contiene datos ficticios locales, aislados de la base; `/` usa Supabase y empieza vacío hasta iniciar sesión y crear cuentas.
+Next.js App Router, React, RHF/Zod, CSS responsive y lucide-react. La portada de `/` presenta cuentas, cuotas y acceso al formulario. Al iniciar sesión se muestra el panel con resumen, movimientos, cuentas, tarjetas, presupuesto, préstamos, proyección, integraciones, dispositivos y avisos. `/demo` usa datos ficticios locales. Claro por defecto y oscuro opcional, con preferencia guardada en el navegador. Ver DISENO.md.
 
 Única base autorizada: Supabase **bolsillo-roto**, `kgergeimnxcyptffvmnp`, `us-east-1`. Se verificó vacía antes de aplicar las migraciones. Tablas: profiles, devices, accounts, transactions, amortizations, api_keys, loans, loan_payments, notifications y recurring_entries. `auth.users` es la identidad canónica; no se duplican contraseñas. `private.api_usage` cuenta consumo por llave.
 
