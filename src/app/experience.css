@@ -2014,3 +2014,64 @@ td {
     align-items: center;
   }
 }
+
+/* A connected sequence turns the three habits into a readable path. */
+.public-site .how-steps {
+  position: relative;
+  gap: 24px;
+}
+.public-site .how-step {
+  position: relative;
+  padding: 28px;
+  border: 0;
+  border-radius: 16px;
+  background: var(--panel);
+  box-shadow: 0 12px 32px -24px rgba(10, 30, 35, .35);
+}
+.public-site .step-number {
+  display: grid;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: var(--mint);
+  color: var(--button-ink);
+  margin-bottom: 24px;
+}
+.public-site .how-step:not(:last-child)::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: 100%;
+  height: 24px;
+  border-left: 2px dashed var(--mint);
+}
+@media (min-width: 900px) {
+  .public-site .how-step:not(:last-child)::after {
+    left: 100%;
+    top: 50%;
+    width: 24px;
+    height: 0;
+    border-left: 0;
+    border-top: 2px dashed var(--mint);
+  }
+}
+@media (prefers-reduced-motion: no-preference) {
+  .account-showcase,
+  .how-step {
+    transition: transform .3s ease-out;
+  }
+  .hero-product .hero-preview {
+    animation: pocket-settle 1.4s cubic-bezier(.22, 1, .36, 1) both;
+  }
+  @keyframes pocket-settle {
+    from { transform: translateY(18px) rotate(2deg); }
+    to { transform: translateY(0) rotate(0); }
+  }
+  @media (hover: hover) {
+    .account-showcase:hover,
+    .how-step:hover {
+      transform: translateY(-5px);
+    }
+  }
+}
