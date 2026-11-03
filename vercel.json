@@ -1,1 +1,39 @@
-{"crons":[{"path":"/api/cron/alerts","schedule":"0 13 * * *"}]}
+{
+  "crons": [
+    {
+      "path": "/api/cron/alerts",
+      "schedule": "0 13 * * *"
+    }
+  ],
+  "headers": [
+    {
+      "source": "/(.*)",
+      "headers": [
+        {
+          "value": "nosniff",
+          "key": "X-Content-Type-Options"
+        },
+        {
+          "value": "DENY",
+          "key": "X-Frame-Options"
+        },
+        {
+          "value": "strict-origin-when-cross-origin",
+          "key": "Referrer-Policy"
+        },
+        {
+          "value": "camera=(), microphone=(), geolocation=()",
+          "key": "Permissions-Policy"
+        },
+        {
+          "value": "frame-ancestors 'none'; object-src 'none'; base-uri 'self'",
+          "key": "Content-Security-Policy"
+        },
+        {
+          "value": "max-age=31536000",
+          "key": "Strict-Transport-Security"
+        }
+      ]
+    }
+  ]
+}

@@ -7,3 +7,16 @@ node_modules/
 supabase/.temp/
 .taste-skill/
 .impeccable/
+
+# Local credentials, exports and diagnostic artifacts
+*.pem
+*.key
+*.p12
+*.pfx
+*.log
+*.sql.gz
+backups/
+dumps/
+coverage/
+playwright-report/
+test-results/
